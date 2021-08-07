@@ -1,0 +1,42 @@
+{
+  "setting": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "name": "components_add_tips",
+          "pathName": "components/add_tips/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "components/canvasdrawer/canvasdrawer",
+          "pathName": "components/canvasdrawer/canvasdrawer",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/poster/poster",
+          "pathName": "pages/poster/poster",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/login/login",
+          "pathName": "pages/login/login",
+          "query": "",
+          "scene": null
+        }
+      ]
+    }
+  }
+}
