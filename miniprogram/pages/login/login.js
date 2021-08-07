@@ -116,6 +116,9 @@ Page({
             //       }
             // })
       },
+      phoneInput(e) {
+            this.data.phone = e.detail.value;
+      },
       wxInput(e) {
             this.data.wxnum = e.detail.value;
       },
@@ -177,7 +180,7 @@ Page({
                                     })
                               }
                         })
-                        
+
                         let that = this;
                         let test = e.errMsg.indexOf("ok");
                         if (test == '-1') {
@@ -201,35 +204,53 @@ Page({
       check() {
             let that = this;
             //校检手机
+            // let phone = that.data.phone;
+            // if (phone == '') {
+            //       wx.showToast({
+            //             title: '请先获取您的电话',
+            //             icon: 'none',
+            //             duration: 2000
+            //       });
+            //       return false
+            // }
+
+            // 校验手机
+            //校检手机
             let phone = that.data.phone;
-            if (phone == '') {
-                  wx.showToast({
-                        title: '请先获取您的电话',
-                        icon: 'none',
-                        duration: 2000
-                  });
-                  return false
+            if (phone !== '') {
+                  if(!(/^1[3|4|5|7|8][0-9]{9}$/.test(phone))){
+                        console.log(!(/^1[3|4|5|7|8][0-9]{9}$/.test(phone)));
+                        console.log(phone);
+                        wx.showToast({
+                              title: '请输入正确的手机号',
+                              icon: 'none',
+                              duration: 2000
+                        });
+                        return false;
+                  }
             }
+            // console.log(222);
+
             //校检校区
             let ids = that.data.ids;
-            let campus = that.data.campus;
-            if (ids == -1) {
+            if (ids === -1) {
                   wx.showToast({
                         title: '请先获取您的校区',
                         icon: 'none',
                         duration: 2000
                   });
-            }
-            //校检邮箱
-            let email = that.data.email;
-            if (!(/^\w+((.\w+)|(-\w+))@[A-Za-z0-9]+((.|-)[A-Za-z0-9]+).[A-Za-z0-9]+$/.test(email))) {
-                  wx.showToast({
-                        title: '请输入常用邮箱',
-                        icon: 'none',
-                        duration: 2000
-                  });
                   return false;
             }
+            //校检邮箱
+            // let email = that.data.email;
+            // if (!(/^\w+((.\w+)|(-\w+))@[A-Za-z0-9]+((.|-)[A-Za-z0-9]+).[A-Za-z0-9]+$/.test(email))) {
+            //       wx.showToast({
+            //             title: '请输入常用邮箱',
+            //             icon: 'none',
+            //             duration: 2000
+            //       });
+            //       return false;
+            // }
             //校检QQ号
             let qqnum = that.data.qqnum;
             if (qqnum !== '') {
@@ -254,6 +275,16 @@ Page({
                         return false;
                   }
             }
+
+            // 至少输入一项
+            if (!phone && !wxnum && !qqnum) {
+                  wx.showToast({
+                        title: '联系方式请至少输入一项',
+                        icon: 'none',
+                        duration: 2000
+                  });
+                  return false;
+            }
             wx.showLoading({
                   title: '正在提交',
             })
@@ -275,7 +306,7 @@ Page({
                         // console.log(res+"----------------")
                         db.collection('user').doc(res._id).get({
                               success: function (res) {
-                                    console.log(res+"-----------------");
+                                    console.log(res + "-----------------");
                                     app.userinfo = res.data;
                                     app.openid = res.data._openid;
                                     wx.hideLoading();

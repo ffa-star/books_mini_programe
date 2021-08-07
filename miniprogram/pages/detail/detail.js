@@ -14,6 +14,7 @@ Page({
             place: '',
       },
       onLoad(e) {   //e里面有id
+            console.log(e);
             this.getuserdetail();
             this.data.id = e.scene;
             this.getPublish(e.scene);
@@ -74,7 +75,7 @@ Page({
             if (!app.openid) {
                   wx.showModal({
                         title: '温馨提示',
-                        content: '该功能需要注册方可使用，是否马上去注册',
+                        content: '该功能需要登录方可使用，是否马上去登录',
                         success(res) {
                               if (res.confirm) {
                                     wx.navigateTo({
@@ -85,17 +86,23 @@ Page({
                   })
                   return false
             }
-            if (that.data.publishinfo.deliveryid == 1) {
-                  if (that.data.place == '') {
-                        wx.showToast({
-                              title: '请输入您的收货地址',
-                              icon: 'none'
-                        })
-                        return false
-                  }
-                  that.getStatus();
-            }
-            that.getStatus();
+            // 跳出弹窗 复制联系方式
+      //      联系方式在userinfo里面
+      
+            
+
+
+            // if (that.data.publishinfo.deliveryid == 1) {
+            //       if (that.data.place == '') {
+            //             wx.showToast({
+            //                   title: '请输入您的收货地址',
+            //                   icon: 'none'
+            //             })
+            //             return false
+            //       }
+            //       that.getStatus();
+            // }
+            // that.getStatus();
       },
       //获取订单状态  这个功能放弃掉或者改掉
       getStatus() {
