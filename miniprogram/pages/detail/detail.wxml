@@ -27,7 +27,9 @@
                   </view>
             </view>
             <view class="sex">
-                  <image lazy-load src="{{userinfo.info.gender==0?'/images/none.png':(userinfo.info.gender==1?'/images/boy.png':'/images/girl.png')}}"></image>
+                  <image lazy-load
+                        src="{{userinfo.info.gender==0?'/images/none.png':(userinfo.info.gender==1?'/images/boy.png':'/images/girl.png')}}">
+                  </image>
             </view>
       </view>
       <view class="time_box">
@@ -118,6 +120,34 @@
       <view class="buy_box">
             <view class="buy shadow" bindtap="buy">{{publishinfo.status==0?'立即购买':'刚刚被抢光了'}}</view>
       </view>
+</view>
+
+<!-- 遮罩层 -->
+<view wx:if="{{isShow}}" wx:key="index" class='cover'>
+      <!-- 可在此按需求自定义遮罩 -->
+      <view class='cover_child'>
+            <text class="child-title">卖家信息</text>
+            <!-- <block wx:for="{{userinfo}}">
+                  <block class="child-row" wx:if="{{userinfo}}">
+                        <view>{{item.title}}</view>
+                        <view bindtap="copy">复制</view>
+                  </block>
+            </block> -->
+            <block wx:if="{{userinfo.phone!==''}}">
+                  <view>手机：{{userinfo.phone}}</view>
+                  <view bindtap="copy">复制</view>
+            </block>
+            <block wx:if="{{userinfo.wxnum!==''}}">
+                  <view>微信：{{userinfo.wxnum}}</view>
+                  <view bindtap="copy">复制</view>
+            </block>
+            <block wx:if="{{userinfo.qqnum!==''}}">
+                  <view>QQ：{{userinfo.qqnum}}</view>
+                  <view bindtap="copy">复制</view>
+            </block>
+      </view>
+      <image catchtap="hideCover" class="cross" src="/images/cancel.png " />
+      <view catchtap="hideCover" wx:if="{{isShow}}" class='bg'></view>
 </view>
 
 <!--悬浮客服功能-->

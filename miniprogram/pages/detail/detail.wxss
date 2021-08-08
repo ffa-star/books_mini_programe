@@ -373,3 +373,69 @@
       letter-spacing: 2rpx;
       margin-top: 10rpx;
 }
+
+/* 遮罩层部分 */
+.bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+}
+
+.cover {
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 0;
+}
+
+.cover_child {
+      width: 600rpx;
+      height: 830rpx;
+      background: rgba(255, 255, 255, 1);
+      border-radius: 20rpx;
+      display: flex;
+      flex-direction: column;
+      z-index: 5;
+}
+
+.child-title {
+      white-space: nowrap;
+      margin-left: 43rpx;
+      margin-top: 32rpx;
+      width: 137rpx;
+      height: 32rpx;
+      font-size: 34rpx;
+      font-weight: bold;
+      color: rgba(18, 90, 217, 1);
+      line-height: 36rpx;
+      margin-bottom: 31rpx;
+}
+
+.child-row {
+      display: flex;
+      flex-direction: row;
+      margin-left: 41rpx;
+      margin-top: 40rpx;
+      height: 28rpx;
+      font-size: 30rpx;
+      font-weight: 500;
+      color: rgba(3, 3, 3, 1);
+      line-height: 36rpx;
+}
+
+.cross {
+      margin-bottom: 110rpx;
+      bottom: 0rpx;
+      position: fixed;
+      width: 60rpx;
+      height: 60rpx;
+      z-index: 5;
+}

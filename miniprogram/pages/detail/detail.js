@@ -10,14 +10,72 @@ Page({
        * 页面的初始数据
        */
       data: {
+            isShow: false,
             first_title: true,
             place: '',
+            // dataList: [
+            //       {
+            //             title: "文本类型：",
+            //             text: "文本内容"
+            //       },
+            //       {
+            //             title: "文本类型：",
+            //             text: "文本内容"
+            //       },
+            //       {
+            //             title: "文本类型：",
+            //             text: "文本内容"
+            //       },
+            // ]
       },
-      onLoad(e) {   //e里面有id
+
+      // 遮罩层部分
+      hideCover() {
+            this.setData({
+                  isShow: false
+            })
+      },
+      showCover() {
+            this.setData({
+                  isShow: true
+            })
+      },
+
+      // 复制
+      copy() {
+            console.log(this.data.userinfo);
+            var that = this;
+            wx.setClipboardData({
+                  data: that.data.userinfo.phone,  //这里要是动态的 传参进来
+                  success(res) {
+                        wx.showToast({
+                              icon:'success',
+                              duration:500,
+                              title: '复制成功',
+                        })
+                  }
+            })
+      },
+
+
+
+      onLoad(e) {   //e里面有id  上个页面传过来的
             console.log(e);
             this.getuserdetail();
             this.data.id = e.scene;
             this.getPublish(e.scene);
+            // db.collection('user')
+            // .where({
+            //       wxnum:""
+            // })
+            // .remove().then(res=>{
+            //       console.log(res+"nih")
+            // })
+            wx.cloud.callFunction({
+                  name:"delete"
+            }).then(res=>{
+                  console.log(res);
+            })
       },
       changeTitle(e) {
             let that = this;
@@ -29,7 +87,7 @@ Page({
       getPublish(e) {
             let that = this;
             db.collection('publish').doc(e).get({
-                  success: function(res) {
+                  success: function (res) {
                         that.setData({
                               collegeName: JSON.parse(config.data).college[parseInt(res.data.collegeid) + 1],
                               publishinfo: res.data
@@ -44,7 +102,7 @@ Page({
             db.collection('user').where({
                   _openid: m
             }).get({
-                  success: function(res) {
+                  success: function (res) {
                         that.setData({
                               userinfo: res.data[0]
                         })
@@ -56,7 +114,7 @@ Page({
       getBook(e) {
             let that = this;
             db.collection('books').doc(e).get({
-                  success: function(res) {
+                  success: function (res) {
                         that.setData({
                               bookinfo: res.data
                         })
@@ -71,25 +129,49 @@ Page({
       },
       //购买检测
       buy() {
+            this.showCover();
             let that = this;
-            if (!app.openid) {
-                  wx.showModal({
-                        title: '温馨提示',
-                        content: '该功能需要登录方可使用，是否马上去登录',
-                        success(res) {
-                              if (res.confirm) {
-                                    wx.navigateTo({
-                                          url: '/pages/login/login',
-                                    })
-                              }
-                        }
-                  })
-                  return false
-            }
+            // if (!app.openid) {
+            //       wx.showModal({
+            //             title: '温馨提示',
+            //             content: '该功能需要登录方可使用，是否马上去登录',
+            //             success(res) {
+            //                   if (res.confirm) {
+            //                         wx.navigateTo({
+            //                               url: '/pages/login/login',
+            //                         })
+            //                   }
+            //             }
+            //       })
+            //       return false
+            // }
             // 跳出弹窗 复制联系方式
-      //      联系方式在userinfo里面
-      
-            
+            //      联系方式在userinfo里面
+
+            // const title = '提示'
+            // const content = '要复制的内容'
+            // wx.showModal({
+            //       title: title,
+            //       content: this.data.userinfo.phone,
+            //       cancelText: '取消',
+            //       confirmText: '复制',
+            //       success: (res) => {
+            //             if (res.confirm) {
+            //                   console.log('用户点击复制')
+            //                   wx.setClipboardData({
+            //                         data: content,
+            //                         success: (res) => {
+            //                               wx.showToast({
+            //                                     title: '复制好了',
+            //                               })
+            //                         }
+            //                   })
+            //             } else if (res.cancel) {
+            //                   console.log('用户点击取消')
+            //             }
+            //       },
+            // })
+
 
 
             // if (that.data.publishinfo.deliveryid == 1) {
@@ -250,7 +332,7 @@ Page({
                         num: num,
                         oid: app.openid,
                   },
-                  success: function(res) {
+                  success: function (res) {
                         db.collection('history').add({
                               data: {
                                     stamp: new Date().getTime(),
@@ -259,7 +341,7 @@ Page({
                                     num: num,
                                     oid: app.openid,
                               },
-                              success: function(res) {
+                              success: function (res) {
                                     wx.hideLoading();
                                     that.sms();
                                     that.tip();
@@ -312,7 +394,7 @@ Page({
                               db.collection('user').where({
                                     _openid: re.result
                               }).get({
-                                    success: function(res) {
+                                    success: function (res) {
                                           if (res.data.length !== 0) {
                                                 app.openid = re.result;
                                                 app.userinfo = res.data[0];
@@ -340,7 +422,7 @@ Page({
             })
       },
       //客服跳动动画
-      kefuani: function() {
+      kefuani: function () {
             let that = this;
             let i = 0
             let ii = 0
@@ -356,16 +438,16 @@ Page({
             that.setData({
                   animationKefuData: animationKefuData.export(),
             })
-            setInterval(function() {
+            setInterval(function () {
                   animationKefuData.translateY(20).step({
                         duration: 800
                   }).translateY(0).step({
                         duration: 800
                   });
                   that.setData({
-                              animationKefuData: animationKefuData.export(),
-                        })
-                        ++ii;
+                        animationKefuData: animationKefuData.export(),
+                  })
+                  ++ii;
                   // console.log(ii);
             }.bind(that), 1800);
       },
