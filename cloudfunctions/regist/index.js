@@ -20,9 +20,9 @@ exports.main = async(event, context) => {
       const app = new TcbRouter({
             event
       });
-      //获取电话号码
-      // app.router('phone', async(ctx) => {
-      app.router(async(ctx) => {
+      //登录解密
+      app.router('phone', async(ctx) => {
+      
             ctx.body = new Promise(resolve => {
                   rq({
                         url: wxurl + '/sns/jscode2session?appid=' + appid + '&secret=' + secret + '&js_code=' + event.code + '&grant_type=authorization_code',
@@ -31,17 +31,26 @@ exports.main = async(event, context) => {
                   }, function(error, response, body) {
                         const decrypt1 = new WXBizDataCrypt(appid, body.session_key) // -解密第一步
                         const decrypt2 = decrypt1.decryptData(event.encryptedData, event.iv) // 解密第二步*/
+                        let{OPENID} = cloud.getWXContext();
                         resolve({
-                              data: decrypt2
+                              data: decrypt2,OPENID
                         })
                   });
             });
       });
       //获取openid
       app.router('getid', async(ctx) => {
-            const wxContext = cloud.getWXContext()
-            ctx.body = wxContext.OPENID;
-            console.log(wxContent.OPENID);
-      });
+            // const wxContext = cloud.getWXContext()
+            // ctx.body = wxContext.OPENID;
+            // console.log(wxContent.OPENID);
+            // console.log("运行到云端了");
+            let{APPID,OPENID} = cloud.getWXContext();
+            console.log(OPENID+"云端openid");
+            return{
+                  APPID,
+                  OPENID
+            }
+
+      });;
       return app.serve();
 }

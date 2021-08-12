@@ -30,7 +30,9 @@ RdWXBizDataCrypt.prototype.decryptData = function (encryptedData, iv) {
   } catch (err) {
     console.log(err)
   }
+
   if (decryptResult.watermark.appid !== this.appId) {
+    console.log("错误"+decryptResult.watermark.appid);
     console.log(err)
   }
 

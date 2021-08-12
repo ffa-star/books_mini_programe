@@ -122,29 +122,26 @@
       </view>
 </view>
 
-<!-- 遮罩层 -->
+<!-- 遮罩层 弹窗-->
 <view wx:if="{{isShow}}" wx:key="index" class='cover'>
       <!-- 可在此按需求自定义遮罩 -->
       <view class='cover_child'>
-            <text class="child-title">卖家信息</text>
-            <!-- <block wx:for="{{userinfo}}">
-                  <block class="child-row" wx:if="{{userinfo}}">
-                        <view>{{item.title}}</view>
-                        <view bindtap="copy">复制</view>
+            <view class="child-title">卖家信息</view>
+            
+            <!-- <view class="child-content"> -->
+                  <block wx:if="{{userinfo.phone!==''}}">
+                        <view>手机：{{userinfo.phone}}</view>
+                        <view bindtap="copy" data-num="{{userinfo.phone}}">复制</view>
                   </block>
-            </block> -->
-            <block wx:if="{{userinfo.phone!==''}}">
-                  <view>手机：{{userinfo.phone}}</view>
-                  <view bindtap="copy">复制</view>
-            </block>
-            <block wx:if="{{userinfo.wxnum!==''}}">
-                  <view>微信：{{userinfo.wxnum}}</view>
-                  <view bindtap="copy">复制</view>
-            </block>
-            <block wx:if="{{userinfo.qqnum!==''}}">
-                  <view>QQ：{{userinfo.qqnum}}</view>
-                  <view bindtap="copy">复制</view>
-            </block>
+                  <block wx:if="{{userinfo.wxnum!==''}}">
+                        <view>微信：{{userinfo.wxnum}}</view>
+                        <view bindtap="copy" data-num="{{userinfo.wxnum}}">复制</view>
+                  </block>
+                  <block wx:if="{{userinfo.qqnum!==''}}">
+                        <view>QQ：{{userinfo.qqnum}}</view>
+                        <view bindtap="copy" data-num="{{userinfo.qqnum}}">复制</view>
+                  </block>
+            <!-- </view> -->
       </view>
       <image catchtap="hideCover" class="cross" src="/images/cancel.png " />
       <view catchtap="hideCover" wx:if="{{isShow}}" class='bg'></view>

@@ -396,10 +396,14 @@
       z-index: 0;
 }
 
+/* .buyer{
+      border-bottom: #eee solid 1rpx;
+} */
+
 .cover_child {
       width: 600rpx;
-      height: 830rpx;
-      background: rgba(255, 255, 255, 1);
+      height: 530rpx;
+      background: rgb(236, 238, 238);
       border-radius: 20rpx;
       display: flex;
       flex-direction: column;
@@ -410,11 +414,12 @@
       white-space: nowrap;
       margin-left: 43rpx;
       margin-top: 32rpx;
-      width: 137rpx;
+      width: 600rpx;
       height: 32rpx;
       font-size: 34rpx;
       font-weight: bold;
       color: rgba(18, 90, 217, 1);
+     
       line-height: 36rpx;
       margin-bottom: 31rpx;
 }
@@ -432,7 +437,7 @@
 }
 
 .cross {
-      margin-bottom: 110rpx;
+      margin-bottom: 200rpx;
       bottom: 0rpx;
       position: fixed;
       width: 60rpx;

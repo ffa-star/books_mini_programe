@@ -1,6 +1,7 @@
 const app = getApp()
 //获取app.js中的数据
 const db = wx.cloud.database();
+// const { fail } = require("assert/strict");
 const config = require("../../config.js");
 //config中存储的是云开发环境 校区
 const _ = db.command;
@@ -42,40 +43,43 @@ Page({
       },
 
       // 复制
-      copy() {
+      copy(event) {
             console.log(this.data.userinfo);
-            var that = this;
+            const {num}=event.currentTarget.dataset;
+            // var that = this;
+       
             wx.setClipboardData({
-                  data: that.data.userinfo.phone,  //这里要是动态的 传参进来
+                  data: num,  //这里要是动态的 传参进来
                   success(res) {
                         wx.showToast({
                               icon:'success',
                               duration:500,
                               title: '复制成功',
                         })
-                  }
+                  },
+                  // fail(res){
+                  //       console.log(res);
+                  //       wx.showToast({
+                  //             // icon:'fail',
+                  //             duration:500,
+                  //             title: '复制失败',
+                  //       })
+                  // }
             })
       },
+      
 
 
 
       onLoad(e) {   //e里面有id  上个页面传过来的
-            console.log(e);
             this.getuserdetail();
             this.data.id = e.scene;
             this.getPublish(e.scene);
-            // db.collection('user')
-            // .where({
-            //       wxnum:""
+            // wx.cloud.callFunction({
+            //       name:"delete"
+            // }).then(res=>{
+            //       console.log("删除");
             // })
-            // .remove().then(res=>{
-            //       console.log(res+"nih")
-            // })
-            wx.cloud.callFunction({
-                  name:"delete"
-            }).then(res=>{
-                  console.log(res);
-            })
       },
       changeTitle(e) {
             let that = this;

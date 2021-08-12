@@ -109,6 +109,7 @@ Page({
                               if (res.confirm) {
                                     wx.navigateTo({
                                           url: '/pages/login/login',
+                                          // url:'/pages/edit/edit'
                                     })
                               }
                         }

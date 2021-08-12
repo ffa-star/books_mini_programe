@@ -20,11 +20,11 @@
             </view>
             <view class="tip" bindtap="copy" data-copy="xuhuai66" data-name="微信">
                   <view>Wechat</view>:
-                  <text>xuhuai66</text>
+                  <text>l2388843616</text>
             </view>
             <view class="tip" bindtap="copy" data-copy="1604026596" data-name="QQ">
                   <view>QQ</view>:
-                  <text>1604026596</text>
+                  <text>2388843616</text>
             </view>
       </view>
 </view>
