@@ -1,6 +1,8 @@
 const db = wx.cloud.database();
-const app = getApp();
+var app = getApp();
+// const { userInfo } = require("os");
 const config = require("../../config.js");
+
 Page({
 
       /**
@@ -27,28 +29,46 @@ Page({
       },
       getdetail() {
             let that = this;
+            that.userInfo = app.userInfo;
             db.collection('user').where({
                   _openid: app.openid
-            }).get({
-                  success: function(res) {
-                        let info = res.data[0];
+            }).get().then(res => {
+                  if (res.data.length === 0) {
+                        db.collection('user').add({
+                              data: {
+                                    // 下面给默认值
+                                    phone: that.data.phone,
+                                    // campus: that.data.campus[that.data.ids],
+                                    campus: { "id": 0, "name": '通大啬园校区' },
+                                    qqnum: that.data.qqnum,
+                                    email: that.data.email,
+                                    wxnum: that.data.wxnum,
+                                    info: app.userInfo,
+                                    useful: true,
+                                    updatedat: new Date().getTime(),
+                                    parse: 0,
+                              },
+                              // 这里的添加失败是一开始默认登录的时候
+                              fail: function (res) {
+                                    wx.showToast({
+                                          title: '添加失败',
+                                          icon: 'none'
+                                    })
+                              }
+                        })
+                  }
+                  else {
+                        let infor = res.data[0];
+                        console.log(infor, "info");
                         that.setData({
-                              phone: info.phone,
-                              qqnum: info.qqnum,
-                              wxnum: info.wxnum,
-                              email: info.email,
-                              ids: info.campus.id,
-                              _id: info._id
+                              phone: infor.phone,
+                              qqnum: infor.qqnum,
+                              wxnum: infor.wxnum,
+                              info:app.userInfo,
+                              ids: infor.campus.id,
+                              _id: infor._id,
+                        
                         })
-                  },
-                  fail() {
-                        wx.showToast({
-                              title: '获取失败',
-                              icon: 'none'
-                        })
-                        let e = setTimeout(
-                              wx.navigateBack({}), 2000
-                        )
                   }
             })
       },
@@ -115,7 +135,7 @@ Page({
       //       })
 
       // },
-      phoneInput(e){
+      phoneInput(e) {
             this.data.phone = e.detail.value;
       },
       wxInput(e) {
@@ -127,45 +147,49 @@ Page({
       emInput(e) {
             this.data.email = e.detail.value;
       },
-      getUserInfo(e) {
-            let that = this;
-            console.log(e);
-            let test = e.detail.errMsg.indexOf("ok");
-            if (test == '-1') {
-                  wx.showToast({
-                        title: '请授权后方可使用',
-                        icon: 'none',
-                        duration: 2000
-                  });
-            } else {
-                  that.setData({
-                        userInfo: e.detail.userInfo
-                  })
-                  that.check();
-            }
-      },
+      // getUserInfo(e) {
+      //       let that = this;
+      //       console.log(e);
+      //       let test = e.detail.errMsg.indexOf("ok");
+      //       if (test == '-1') {
+      //             wx.showToast({
+      //                   title: '请授权后方可使用',
+      //                   icon: 'none',
+      //                   duration: 2000
+      //             });
+      //       } else {
+      //             that.setData({
+      //                   userInfo: e.detail.userInfo
+      //             })
+      //             that.check();
+      //       }
+      // },
       //校检
       check() {
             let that = this;
             //校检手机
             let phone = that.data.phone;
-            if (phone == '') {
-                  wx.showToast({
-                        title: '请先获取您的电话',
-                        icon: 'none',
-                        duration: 2000
-                  });
-                  return false
+            if (phone !== '') {
+                  if (!(/^1[3|4|5|7|8][0-9]{9}$/.test(phone))) {
+                        console.log(!(/^1[3|4|5|7|8][0-9]{9}$/.test(phone)));
+                        console.log(phone);
+                        wx.showToast({
+                              title: '请输入正确的手机号',
+                              icon: 'none',
+                              duration: 2000
+                        });
+                        return false;
+                  }
             }
             //校检校区
             let ids = that.data.ids;
-            let campus = that.data.campus;
-            if (ids == -1) {
+            if (ids === -1) {
                   wx.showToast({
                         title: '请先获取您的校区',
                         icon: 'none',
                         duration: 2000
                   });
+                  return false;
             }
             //校检QQ号
             let qqnum = that.data.qqnum;
@@ -191,40 +215,61 @@ Page({
                         return false;
                   }
             }
-            wx.showLoading({
-                  title: '正在提交',
-            })
-            db.collection('user').doc(that.data._id).update({
-                  data: {
-                        phone: that.data.phone,
-                        campus: that.data.campus[that.data.ids],
-                        qqnum: that.data.qqnum,
-                        email: that.data.email,
-                        wxnum: that.data.wxnum,
-                        info: that.data.userInfo,
-                        updatedat: new Date().getTime(),
-                  },
-                  success: function(res) {
-                        console.log(res)
-                        db.collection('user').doc(that.data._id).get({
-                              success: function(res) {
-                                    app.userinfo = res.data;
-                                    app.openid = res.data._openid;
-                                    wx.hideLoading();
-                                    wx.showToast({
-                                          title: '修改成功',
-                                          icon: 'success'
-                                    })
-                              },
+            // 至少输入一项
+            if (!phone && !wxnum && !qqnum) {
+                  wx.showToast({
+                        title: '联系方式请至少输入一项',
+                        icon: 'none',
+                        duration: 1000
+                  });
+                  return false;
+            }
+            return true;
+      },
+
+      // 提交
+      submit() {
+            let that = this;
+            if (that.check()) {
+                  wx.showLoading({
+                        title: '正在提交',
+                  })
+                  db.collection('user').where({
+                        _openid: app.openid
+                  }).update({
+                        data: {
+                              phone: that.data.phone,
+                              campus: that.data.campus[that.data.ids],
+                              qqnum: that.data.qqnum,
+                              email: that.data.email,
+                              wxnum: that.data.wxnum,
+                              info: app.userInfo,
+                              updatedat: new Date().getTime(),
+                        }
+                  }).then(res=>{
+                        wx.showToast({
+                              title: '修改成功',
+                              icon: 'success'
                         })
-                  },
-                  fail() {
+                        wx.navigateBack({
+                              delta: 2,
+                        })
+                  }).catch(res=>{
                         wx.hideLoading();
                         wx.showToast({
                               title: '注册失败，请重新提交',
                               icon: 'none',
                         })
-                  }
-            })
+                  })
+            }
       },
+      skip(){
+            if(this.check()){
+                  wx.navigateBack({
+                        delta: 1,
+                  })
+            }
+      }
+
+
 })

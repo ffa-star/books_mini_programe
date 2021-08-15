@@ -2,6 +2,10 @@ page {
       background: #fff;
       width: 100%;
       height: 100%;
+      /* font-family:'Courier New', Courier, monospace; */
+      font-size: 32rpx;
+      /*微信小程序中，使用rpx做单位*/
+
 }
 
 .shadow {
@@ -32,6 +36,7 @@ page {
       color: #b2b2b2;
       letter-spacing: 4rpx;
 }
+
 .totop {
       position: fixed;
       right: 30rpx;

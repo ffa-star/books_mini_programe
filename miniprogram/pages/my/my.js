@@ -1,5 +1,6 @@
 const app = getApp();
 const config = require("../../config.js");
+import { login } from "../../request/index.js";
 Page({
 
       /**
@@ -11,7 +12,38 @@ Page({
       },
       onShow() {
             this.setData({
-                  userinfo: app.userinfo
+                  userInfo: app.userInfo
+            })
+      },
+      getUserInfo() {
+            let that = this;
+            wx.getUserProfile({
+                  desc: '用于完善会员资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
+                   success: async (res) => {
+                        const {result} = await login(res);
+                        app.openid = result.OPENID;
+                        app.userInfo = res.userInfo;
+                        let test = res.errMsg.indexOf("ok");
+                        if (test == '-1') {
+                              wx.showToast({
+                                    title: '请授权后方可使用',
+                                    icon: 'none',
+                                    duration: 2000
+                              });
+                        } else {
+                              that.setData({
+                                    userInfo: res.userInfo
+                              })
+                              // that.check();
+                              // that.toZhuCe();
+                              wx.navigateTo({
+                                    url: '/pages/edit/edit',
+                              })
+                        }
+                  },
+                  fail:()=>{
+                        console.log("取消了")
+                  },
             })
       },
       go(e) {

@@ -134,6 +134,12 @@
           "pathName": "pages/help/help",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/start/start",
+          "pathName": "pages/start/start",
+          "query": "",
+          "scene": null
         }
       ]
     }

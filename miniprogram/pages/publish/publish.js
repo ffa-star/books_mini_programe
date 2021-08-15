@@ -1,6 +1,7 @@
 const db = wx.cloud.database();
 const app = getApp();
 const config = require("../../config.js");
+import { login } from "../../request/index.js";
 Page({
       data: {
             systeminfo: app.systeminfo,
@@ -102,22 +103,57 @@ Page({
                   return false;
             }
             if (!app.openid) {
-                  wx.showModal({
-                        title: '温馨提示',
-                        content: '该功能需要注册方可使用，是否马上去注册',
-                        success(res) {
-                              if (res.confirm) {
-                                    wx.navigateTo({
-                                          url: '/pages/login/login',
-                                          // url:'/pages/edit/edit'
-                                    })
-                              }
-                        }
-                  })
-                  return false
+                  // wx.showModal({
+                  //       title: '温馨提示',
+                  //       content: '该功能需要注册方可使用，是否马上去注册',
+                  //       success(res) {
+                  //             if (res.confirm) {
+                  //                  that.getUserInfo();
+                  //             }
+                  //       }
+                  // })
+
+                  // 这里可以设置userinfo函数返回值。就不需要重复点击了。
+                  that.getUserInfo();
+                  return false;
+                  // 这里的话就需要用户重新点击确认了，因为返回false。
             }
             that.get_book(isbn);
       },
+
+      // 登录
+      getUserInfo() {
+            let that = this;
+            wx.getUserProfile({
+                  desc: '用于完善会员资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
+                   success: async (res) => {
+                        const {result} = await login(res);
+                        app.openid = result.OPENID;
+                        app.userInfo = res.userInfo;
+                        let test = res.errMsg.indexOf("ok");
+                        if (test == '-1') {
+                              wx.showToast({
+                                    title: '请授权后方可使用',
+                                    icon: 'none',
+                                    duration: 2000
+                              });
+                        } else {
+                              that.setData({
+                                    userInfo: res.userInfo
+                              })
+                              // that.check();
+                              // that.toZhuCe();
+                              wx.navigateTo({
+                                    url: '/pages/edit/edit',
+                              })
+                        }
+                  },
+                  fail:()=>{
+                        console.log("取消了")
+                  },
+            })
+      },
+
       //查询书籍数据库详情
       get_book(bn) {
             let that = this;
@@ -328,6 +364,15 @@ Page({
             let that = this;
             wx.navigateTo({
                   url: '/pages/detail/detail?scene=' + that.data.detail_id,
+            })
+      },
+
+      // 返回
+      check_return(){
+            this.setData({
+                  show_a:true,
+                  show_b:false,
+                  active: 0,
             })
       }
 })

@@ -14,8 +14,8 @@
   <view>
     <text>2. 点击「添加到我的小程序」</text>
     <image src='./assets/fav-2.jpg' style='width:100%;height:200px;'></image>
-  </view>
-  <view>
+  </view> 
+  <view> 
     <text>3. 微信首页下拉，快速进入小程序</text>
     <image src='./assets/fav-3.jpg' style='width:100%;height:150px;'></image>
   </view>

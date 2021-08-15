@@ -1,4 +1,6 @@
+
 <view class="top_steps">
+<view class="first"></view>
       <van-steps steps="{{ steps }}" active="{{ active }}" active-color="#000000" />
 </view>
 <view style="height:66.8px"></view>
@@ -8,7 +10,7 @@
       <view class="a_contain">
             <view class="a_inp shadow">
                   <image class="a_scan" src="/images/scan.png"></image>
-                  <input bindconfirm="confirm" bindinput="isbnInput" value="{{isbn}}" type="number" maxlength="13" placeholder-class="a_pla" placeholder="请输入书本的ISBN号码" />
+                  <input bindconfirm="confirm" bindinput="isbnInput" value="{{isbn}}" type="number" maxlength="13" placeholder-class="a_pla" placeholder="请输入书本的ISBN号码(纯数字)" />
                   <view class="a_confirm" bindtap="confirm">确认</view>
             </view>
             <image class="a_isbn" src="/images/isbn.jpg" />
@@ -102,6 +104,8 @@
                         <text>* </text>此时长内您的发布信息将会展示给所有同学，超时后您只需去个人中心处擦亮即可再次展示</view>
             </view>
             <view class="b_publish" bindtap="check_pub">马上发布
+            </view>
+            <view class="b_publish" bindtap="check_return">返回
             </view>
       </view>
 </van-transition>

@@ -57,14 +57,14 @@ Page({
                               title: '复制成功',
                         })
                   },
-                  // fail(res){
-                  //       console.log(res);
-                  //       wx.showToast({
-                  //             // icon:'fail',
-                  //             duration:500,
-                  //             title: '复制失败',
-                  //       })
-                  // }
+                  fail(res){
+                        console.log(res);
+                        wx.showToast({
+                              // icon:'fail',
+                              duration:500,
+                              title: '复制失败',
+                        })
+                  }
             })
       },
       
@@ -102,11 +102,12 @@ Page({
       },
       //获取卖家信息
       getSeller(m, n) {
-            let that = this;
+            let that = this; 
             db.collection('user').where({
                   _openid: m
             }).get({
                   success: function (res) {
+                        console.log(res,"卖家信息");
                         that.setData({
                               userinfo: res.data[0]
                         })

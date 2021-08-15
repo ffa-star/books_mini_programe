@@ -1,15 +1,13 @@
 {
   "pages": [
-   
-    "pages/start/start",
     "pages/index/index",
     "pages/login/login",
     "pages/publish/publish",
     "pages/my/my",
     "pages/detail/detail",
     "pages/success/success",
-    "pages/order/detail/detail",
-    "pages/order/list/list",
+    "pages/order/detail/detail", 
+    "pages/order/list/list", 
     "pages/help/help",
     "pages/kefu/kefu",
     "pages/parse/parse",
@@ -25,11 +23,11 @@
 
   ],
   "window": {
-    "backgroundColor": "#fbbd08",
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fbbd08",
+    "backgroundColor": "#e9f1f6",   
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor":"#e9f1f6",
     "navigationBarTitleText": "通大闲闲书店",
-    "navigationBarTextStyle": "white"
+    "navigationBarTextStyle": "black"
   },
   "sitemapLocation": "sitemap.json",
   "tabBar": {

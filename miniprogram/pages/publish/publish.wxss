@@ -1,7 +1,11 @@
 page {
       background: #f6f7fa;
 }
-
+.first{
+      height:30rpx;
+      width:100%;
+      background-color: #e9f1f6;
+}
 .top_steps {
       position: fixed;
       top: 0rpx;
@@ -95,15 +99,16 @@ page {
 
 .a_sao button {
       width: 500rpx;
-      height: 80rpx;
+      height: 100rpx;
       display: flex;
       justify-content: center;
       align-items: center;
-      background: #fbbd08;
+      /* background: -webkit-linear-gradient(left,pink,lightblue,skyblue); */
+      background: -webkit-linear-gradient(left,#34e89e,#00abd5);
       color: #fff;
       border-radius: 40rpx;
       letter-spacing: 4rpx;
-      font-size: 32rpx;
+      font-size: 40rpx;
       border: none;
       font-weight: 500;
 }

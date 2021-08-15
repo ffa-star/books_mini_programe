@@ -23,8 +23,10 @@
 
 
 const db = wx.cloud.database();
-var app = getApp();
+const app = getApp();
 const config = require("../../config.js");
+// const Promise = require('../../request/index.js')
+import { login } from "../../request/index.js";
 Page({
 
       /**
@@ -36,7 +38,7 @@ Page({
             wxnum: '',
             qqnum: '',
             email: '',
-            OPENID:'',
+            openid: '',
             campus: JSON.parse(config.data).campus,
       },
       choose(e) {
@@ -61,78 +63,62 @@ Page({
             this.data.email = e.detail.value;
       },
       getUserInfo() {
-           let that = this;
+            let that = this;
             wx.getUserProfile({
-                  
                   desc: '用于完善会员资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
-                  success: (e) => {
-                        wx.login({
-                              success(re) {
-                                    wx.cloud.callFunction({
-                                          name: 'regist', // 对应云函数名
-                                          data: {
-                                                $url: "phone", //云函数路由参数
-                                                encryptedData: e.encryptedData,  //这里的e是原本的getPhoneNum中的e 
-                                                iv: e.iv,
-                                                code: re.code
-                                          }
-                                    }).then(res=>{
-                                          const {OPENID} = res.result;
-                                          that.data.OPENID = OPENID;
-                                          app.openid = OPENID
-                                          console.log(OPENID+"success里面的");
-                                    })
-                                          // success: res => {
-                                               
-                                          // },
-                                          // fail: err => {
-                                          //       console.error(err);
-                                          //       wx.hideLoading()
-                                          //       wx.showToast({
-                                          //             title: '获取失败,请重新获取',
-                                          //             icon: 'none',
-                                          //             duration: 2000
-                                          //       })
-                                          // }
-                                   
-                              },
-                              // success(res) {
-                              //       if (res.code) {
-                              //       // 发起网络请求
-                              //       wx.request({
-                              //         url: 'https://api.weixin.qq.com',
-                              //       //   /sns/jscode2session
-                              //         data: {
-                              //             appid:"wx5236a29540d945cf",  //开发者appid
-                              //             secret:"1d0b72b8bb6543eb0dcc8fa54c1aba1a", //开发者AppSecret(小程序密钥)	
-                              //             grant_type:"authorization_code",  //默认authorization_code
-                              //             js_code: res.code    //wx.login登录获取的code值
-                              //         },
-                              //         success(res) {
-                              //       //     this.userinfo.openid=res.data.openid;
-                              //       console.log(res.data.openid);
-                              //       //     this.userinfo.session_key=res.data.session_key;						   
-                              //     }
-                              //       })
-                              //     } else {
-                              //       console.log('登录失败！' + res.errMsg)
-                              //     }
+                   success: async (e) => {
+                        // wx.login({
+                        //       success(re) {
+                        //             wx.cloud.callFunction({
+                        //                   name: 'regist', // 对应云函数名
+                        //                   data: {
+                        //                         $url: "phone", //云函数路由参数
+                        //                         encryptedData: e.encryptedData,  //这里的e是原本的getPhoneNum中的e 
+                        //                         iv: e.iv,
+                        //                         code: re.code
+                        //                   }
+                        //             }).then(res => {
+                        //                   const { OPENID } = res.result;
+                        //                   that.data.OPENID = OPENID;
+                        //                   app.openid = OPENID
+                        //                   console.log(OPENID + "success里面的");
+                        //             })
+                        //             // success: res => {
 
-                              // }
+                        //             // },
+                        //             // fail: err => {
+                        //             //       console.error(err);
+                        //             //       wx.hideLoading()
+                        //             //       wx.showToast({
+                        //             //             title: '获取失败,请重新获取',
+                        //             //             icon: 'none',
+                        //             //             duration: 2000
+                        //             //       })
+                        //             // }
 
-                              // 原来的
-                              //     })
-                              fail: err => {
-                                    console.error(err);
-                                    wx.hideLoading()
-                                    wx.showToast({
-                                          title: '获取失败,请重新获取',
-                                          icon: 'none',
-                                          duration: 2000
-                                    })
-                              }
-                        })
+                        //       },
+
+                        //       // 原来的
+                        //       //     })
+                        //       fail: err => {
+                        //             console.error(err);
+                        //             wx.hideLoading()
+                        //             wx.showToast({
+                        //                   title: '获取失败,请重新获取',
+                        //                   icon: 'none',
+                        //                   duration: 2000
+                        //             })
+                        //       }
+                        // })
                         // let that = this;
+                        // const result = await login(e);
+                        const {result} = await login(e);
+                        that.setData({
+                              openid:result.OPENID
+                        })
+                        console.log(result,"result login ");
+                        app.openid = result.OPENID;
+                        app.userInfo = result.data;
                         let test = e.errMsg.indexOf("ok");
                         if (test == '-1') {
                               wx.showToast({
@@ -145,30 +131,20 @@ Page({
                                     userInfo: e.userInfo
                               })
                               // that.check();
-                              that.toZhuCe();
+                              // that.toZhuCe();
+                              console.log("跳转前" + app.openid);
+                              wx.navigateTo({
+                                    url: '/pages/edit/edit',
+                              })
                         }
                   }
             })
       },
 
-      // 跳转注册按钮
-      toZhuCe(){
-            // 根据openid判断数据库中是否有这个人
-
-            //  如果有，直接跳转
-
-            // 如果没有，先添加数据，再跳转。
-
-            // 以上两步可以直接跳转试试
-      }
-
-
-
       //校检
       check() {
-      
+
             let that = this;
-            // console.log("data中的openid"+that.data.OPENID);
             //校检手机
             let phone = that.data.phone;
             if (phone !== '') {
@@ -233,7 +209,7 @@ Page({
             })
             // 录入到数据库中
             db.collection('user').where({
-                  _openid:app.openid
+                  _openid: app.openid
             }).update({
                   data: {
                         phone: that.data.phone,

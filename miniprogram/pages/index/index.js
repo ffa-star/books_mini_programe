@@ -213,6 +213,8 @@ Page({
                   })
             }
       },
+
+      //开始页面 
       onShareAppMessage() {
             return {
                   title: JSON.parse(config.data).share_title,

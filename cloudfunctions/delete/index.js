@@ -10,7 +10,7 @@ exports.main = async (event, context) => {
   try {
       const _ = db.command
       return await db.collection('user').where({
-        phone:'15895688703' //只要月份字段存在，就删除
+        _openid:'o4kZU5eONBPDYpfukHbFCIVepzwk' //只要月份字段存在，就删除
       }).remove()
     }
  catch (e) {

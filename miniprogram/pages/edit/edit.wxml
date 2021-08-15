@@ -1,15 +1,13 @@
  <view class="top-bg"></view>
 <view class="contain">
-      <view class="card">
+      <view class="card" style="width: 671rpx; height: 661rpx; display: block; box-sizing: border-box; left: NaNrpx; top: NaNrpx">
             <view class="title">修改资料</view>
             <!-- <button class="phone" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">
                   <block wx:if="{{phone==''}}"> 请点击获取您的手机号</block>
                   <block wx:if="{{phone!==''}}"> {{phone}}</block>
                   <image wx:if="{{phone==''}}" class="right" src="/images/right.png" />
             </button> -->
-            <view class="contact">
-                  <input bindinput="phoneInput" value="{{phone}}" maxlength="30" placeholder-class="pache" placeholder="输入您的手机号" />
-            </view>
+            
             <picker bindchange="choose" value="{{ids}}" range="{{campus}}" range-key="name">
                   <view class="campus">
                         <block wx:if="{{ids!==-1}}">当前选择：{{campus[ids].name}}</block>
@@ -21,6 +19,9 @@
                   <input bindinput="emInput" value="{{email}}" maxlength="30" placeholder-class="pache" placeholder="输入您的邮箱地址" />
             </view> -->
             <view class="contact">
+                  <input bindinput="phoneInput" value="{{phone}}" maxlength="30" placeholder-class="pache" placeholder="输入您的手机号" />
+            </view>
+            <view class="contact">
                   <input bindinput="wxInput" value="{{wxnum}}" maxlength="30" placeholder-class="pache" placeholder="输入您的微信号(选填)" />
             </view>
             <view class="contact">
@@ -28,7 +29,9 @@
             </view>
       </view> 
       <!--底部确认-->
-     <button class="confirm" open-type='getUserInfo' bindgetuserinfo="getUserInfo">提交修改</button>
+     <!-- <button class="confirm" open-type='getUserInfo' bindgetuserinfo="getUserInfo">提交修改</button> -->
+     <button class="confirm" bindtap="submit">提交修改</button>
+     <button class="confirm" bindtap="skip">跳过</button>
       <view class="shen_title">
             <image class="about" src="/images/about.png" />使用申明
       </view>
