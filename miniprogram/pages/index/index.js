@@ -197,8 +197,9 @@ Page({
       //获取轮播
       getbanner() {
             let that = this;
-            db.collection('banner').where({}).get({
+            db.collection('banner').get({
                   success: function(res) {
+                        console.log(res,"轮播图");
                         that.setData({
                               banner: res.data[0].list
                         })

@@ -6,14 +6,20 @@
       </view>
       <image bindtap="changeCard" class="top_list" src="{{iscard?'/images/list.png':'/images/card.png'}}"></image>
 </view>
+
+<!-- 轮播图 -->
 <swiper class="banner" indicator-dots autoplay indicator-active-color="#fbbd08" circular>
-      <block wx:for="{{banner}}" wx:key="id">
-            <swiper-item>
-                  <image lazy-load src="{{item.img}}" bindtap="goweb" data-web="{{item}}" class="banner_image" />
+      <!-- <view wx:for="{{banner}}" wx:key="id"> -->
+            <swiper-item >
+                  <image lazy-load mode="widthFix" src="{{banner.img}}" bindtap="goweb" data-web="{{banner}}" class="banner_image" />
+                  <!-- lazy-load  -->
             </swiper-item>
-      </block>
+      <!-- </view> -->
 </swiper>
+
+<!-- 中间的间隔 -->
 <view class="space"></view>
+
 <!--分类导航-->
 <view class="{{scrollTop>310?'nofixed':''}}">
 </view>
@@ -21,14 +27,18 @@
       <view class="nav-item {{-2==collegeCur?'tab-on':''}}" bindtap="selectAll">
             <view class="nav-text">全部</view>
       </view>
+      <!-- 下面是滚动的部分 -->
+      <!-- scrollLeft就是右滑之后 -->
       <scroll-view scroll-x class="nav" scroll-with-animation scroll-left="{{scrollLeft}}rpx">
             <view class="nav-item" wx:for="{{college}}" wx:key="id" bindtap="collegeSelect" data-id="{{index}}">
+            <!-- 下面是被选中的字体改变 -->
                   <view class="nav-text {{index==collegeCur+1?'tab-on':''}}">{{item.name}}</view>
             </view>
       </scroll-view>
       <view class="kind_img" bindtap="showlist">
             <image lazy-load src="{{showList?'/images/l_down.png':'/images/l_right.png'}}" />
       </view>
+
       <view class="kindlist_box" wx:if="{{showList}}">
             <view class="kindlist_card">
                   <view class="list_grid">
@@ -40,6 +50,7 @@
                   </view>
             </view>
       </view>
+      
 </view>
 <!--列表显示-->
 <view hidden="{{iscard}}">

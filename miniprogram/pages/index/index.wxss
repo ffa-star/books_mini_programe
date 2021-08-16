@@ -98,10 +98,11 @@
 }
 
 .tab-on {
-      color: #fbbd08;
+      color: #00adb5;
+      /* color: #00b8a9; */
       font-size: 32rpx !important;
       font-weight: 600;
-      border-bottom: 4rpx solid #fbbd08 !important;
+      border-bottom: 4rpx solid   #11999e !important;
 }
 
 .kind_img {

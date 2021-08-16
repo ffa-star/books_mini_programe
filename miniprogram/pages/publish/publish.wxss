@@ -104,7 +104,7 @@ page {
       justify-content: center;
       align-items: center;
       /* background: -webkit-linear-gradient(left,pink,lightblue,skyblue); */
-      background: -webkit-linear-gradient(left,#34e89e,#00abd5);
+      background: -webkit-linear-gradient(top,#34e89e,#00abd5);
       color: #fff;
       border-radius: 40rpx;
       letter-spacing: 4rpx;
