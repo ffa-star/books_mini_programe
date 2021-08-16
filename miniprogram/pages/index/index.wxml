@@ -39,6 +39,7 @@
             <image lazy-load src="{{showList?'/images/l_down.png':'/images/l_right.png'}}" />
       </view>
 
+      <!-- 下面是 -->
       <view class="kindlist_box" wx:if="{{showList}}">
             <view class="kindlist_card">
                   <view class="list_grid">
