@@ -10,14 +10,31 @@ Page({
             scrollTop: 0,
             nomore: false,
             list: [],
+            length:0,
+            height:0
       },
       onLoad() {
             this.listkind();
             this.getbanner();
             this.getList();
       },
+
+      // swiper滚动
+      swiperChange(e){
+           this.swiperCollegeSelect(e.detail.current-1);
+      },
+      swiperCollegeSelect(e) {
+            this.setData({
+                  collegeCur: e - 1,
+                  scrollLeft: (e- 3) * 100,
+                  showList: false,
+            })
+            this.getList();
+      },
+
       //监测屏幕滚动
       onPageScroll: function(e) {
+            console.log("屏幕滚动");
             this.setData({
                   scrollTop: parseInt((e.scrollTop) * wx.getSystemInfoSync().pixelRatio)
             })
@@ -97,6 +114,7 @@ Page({
                   })
             }
       },
+      //获取图书列表
       getList() {
             let that = this;
             if (that.data.collegeCur == -2) {
@@ -113,7 +131,6 @@ Page({
                         wx.stopPullDownRefresh(); //暂停刷新动作
                         if (res.data.length == 0) {
                               that.setData({
-                                    nomore: true,
                                     list: [],
                               })
                               return false;
@@ -123,6 +140,8 @@ Page({
                                     nomore: true,
                                     page: 0,
                                     list: res.data,
+                                    // length:res.data.length,
+                                    height:res.data.length*277
                               })
                         } else {
                               that.setData({
@@ -134,11 +153,15 @@ Page({
                   }
             })
       },
+      // 获得更多
       more() {
             let that = this;
+            console.log("more");
             if (that.data.nomore || that.data.list.length < 20) {
+                  console.log("nomore");
                   return false
             }
+            console.log("跳过if");
             let page = that.data.page + 1;
             if (that.data.collegeCur == -2) {
                   var collegeid = _.neq(-2); //除-2之外所有
@@ -177,6 +200,7 @@ Page({
       },
       onReachBottom() {
             this.more();
+            console.log("触底");
       },
       //下拉刷新
       onPullDownRefresh() {

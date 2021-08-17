@@ -10,10 +10,11 @@
 <!-- 轮播图 -->
 <swiper class="banner" indicator-dots autoplay indicator-active-color="#fbbd08" circular>
       <!-- <view wx:for="{{banner}}" wx:key="id"> -->
-            <swiper-item >
-                  <image lazy-load mode="widthFix" src="{{banner.img}}" bindtap="goweb" data-web="{{banner}}" class="banner_image" />
-                  <!-- lazy-load  -->
-            </swiper-item>
+      <swiper-item>
+            <image lazy-load mode="widthFix" src="{{banner.img}}" bindtap="goweb" data-web="{{banner}}"
+                  class="banner_image" />
+            <!-- lazy-load  -->
+      </swiper-item>
       <!-- </view> -->
 </swiper>
 
@@ -23,7 +24,7 @@
 <!--分类导航-->
 <view class="{{scrollTop>310?'nofixed':''}}">
 </view>
-<view class="kind_contain {{scrollTop>310?'fixed':''}}">
+<view class="kind_contain {{scrollTop>258?'fixed':''}}">
       <view class="nav-item {{-2==collegeCur?'tab-on':''}}" bindtap="selectAll">
             <view class="nav-text">全部</view>
       </view>
@@ -31,7 +32,8 @@
       <!-- scrollLeft就是右滑之后 -->
       <scroll-view scroll-x class="nav" scroll-with-animation scroll-left="{{scrollLeft}}rpx">
             <view class="nav-item" wx:for="{{college}}" wx:key="id" bindtap="collegeSelect" data-id="{{index}}">
-            <!-- 下面是被选中的字体改变 -->
+                  <!-- 每点击一次，重新获取书籍list -->
+                  <!-- 下面是被选中的字体改变 -->
                   <view class="nav-text {{index==collegeCur+1?'tab-on':''}}">{{item.name}}</view>
             </view>
       </scroll-view>
@@ -39,21 +41,22 @@
             <image lazy-load src="{{showList?'/images/l_down.png':'/images/l_right.png'}}" />
       </view>
 
-      <!-- 下面是 -->
+      <!-- 下面是把学院全部展开 -->
       <view class="kindlist_box" wx:if="{{showList}}">
             <view class="kindlist_card">
                   <view class="list_grid">
                         <block wx:for="{{college}}" wx:key="id">
-                              <view class="list_one" bindtap="collegeSelect" data-id="{{index}}" data-class="{{item.id}}">
+                              <view class="list_one" bindtap="collegeSelect" data-id="{{index}}"
+                                    data-class="{{item.id}}">
                                     <view class="{{index==collegeCur+1?'list-on':''}}">{{item.name}}</view>
                               </view>
                         </block>
                   </view>
             </view>
       </view>
-      
+
 </view>
-<!--列表显示-->
+<!--宫格显示-->
 <view hidden="{{iscard}}">
       <view class="card_grid" wx:if="{{list.length>0}}">
             <block wx:for="{{list}}" wx:key="_id">
@@ -72,11 +75,48 @@
       </view>
 </view>
 
-<!--宫格显示-->
-<view hidden="{{!iscard}}">
+<!-- 现在的问题是如果上面点击后，应该更新swiper-item的id 或者这里用变量 -->
+<!-- 列表显示 -->
+<block wx:if="{{list.length>=0}}">
+      <!-- <swiper style="height:calc({{length}}*277rpx)" bindchange="swiperChange"> -->
+            <swiper style="height:{{height<=500? 650:height}}rpx" bindchange="swiperChange">
+            <!-- swiper-item相当于一个页面，所以这里循环college，循环college页面 -->
+            <swiper-item wx:for="{{college}}" wx:for-item="i">
+                  <block class="nocontent" wx:if="{{list.length==0}}">
+                        <image lazy-load src="/images/blank.png"></image>
+                        <view class="blank_text">这里空空如也~</view>
+                  </block>
+                  <block wx:if="{{list.length>0}}">
+                        <block wx:for="{{list}}" wx:key="_id">
+                              <!-- 循环列表，下面是一本书的内容 -->
+                              <view class="list_box" bindtap="detail" data-id="{{item._id}}">
+                                    <image lazy-load class="list_poster" src="{{item.bookinfo.pic}}"></image>
+                                    <view class="list_content">
+                                          <view class="list_word">
+                                                <view class="list_title text-cut">{{item.bookinfo.title}}
+                                                </view>
+                                                <view class="list_author text-cut">{{item.bookinfo.author}}
+                                                </view>
+                                          </view>
+                                          <view class="list_between">
+                                                <view class="list_price">￥{{item.price}}.00元</view>
+                                                <view class="list_time">{{morejs.timelog(item.creat )}}发布
+                                                </view>
+                                          </view>
+                                    </view>
+                              </view>
+                        </block>
+                  </block>
+            </swiper-item>
+      </swiper>
+</block>
+
+<!-- 列表显示 -->
+<!-- <view hidden="{{!iscard}}">
       <block wx:if="{{list.length>0}}">
-            <block wx:for="{{list}}" wx:key="_id">
-                  <view class="list_box" bindtap="detail" data-id="{{item._id}}">
+            <block wx:for="{{list}}" wx:key="_id"> -->
+<!-- 循环列表，下面是一本书的内容 -->
+<!-- <view class="list_box" bindtap="detail" data-id="{{item._id}}">
                         <image lazy-load class="list_poster" src="{{item.bookinfo.pic}}"></image>
                         <view class="list_content">
                               <view class="list_word">
@@ -94,20 +134,20 @@
                   </view>
             </block>
       </block>
-</view>
+</view> -->
 <!--无内容显示-->
-<view class="nocontent" wx:if="{{list.length==0}}">
-      <image lazy-load src="/images/blank.png"></image>
-      <view class="blank_text">这里空空如也~</view>
-</view>
 
+
+<!-- 已加载到底？ -->
 <block wx:if="{{list.length>10}}">
       <import src="/common.wxml" />
       <template is="loadmore" data="{{nomore}}" />
 </block>
+
+<!-- 回到顶部 -->
 <van-transition show="{{ scrollTop>500 }}" custom-class="block" duration="600">
       <view class="totop" bindtap="gotop">
-            <image  lazy-load src="/images/top.png"></image>
+            <image lazy-load src="/images/top.png"></image>
       </view>
 </van-transition>
 <!--首次进入提示收藏小程序-->

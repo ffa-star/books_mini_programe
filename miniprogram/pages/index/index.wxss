@@ -70,6 +70,7 @@
       background: #fff;
       align-items: center;
       position: relative;
+      z-index: 7;
 }
 
 .nav {
@@ -214,7 +215,7 @@
 
 .card_price {
       font-size: 33rpx;
-      color: rgb(255, 0, 0);
+      color: rgb(0, 0, 0);
 }
 
 .card_buy {
@@ -223,6 +224,10 @@
       height: 40rpx;
 }
 
+.swiperContent{
+      position:relative;
+      margin-top: 20rpx;
+}
 .list_box {
       width: 100%;
       display: flex;
@@ -280,8 +285,8 @@
 }
 
 .list_price {
-      font-size: 36rpx;
-      color: rgb(255, 0, 0);
+      font-size: 33rpx;
+      color: rgb(0, 0, 0);
 }
 
 .list_time {

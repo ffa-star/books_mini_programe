@@ -140,6 +140,12 @@
           "pathName": "pages/start/start",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "common",
+          "pathName": "common",
+          "query": "",
+          "scene": null
         }
       ]
     }
