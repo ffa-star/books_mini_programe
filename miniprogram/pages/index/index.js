@@ -10,31 +10,43 @@ Page({
             scrollTop: 0,
             nomore: false,
             list: [],
-            length:0,
-            height:0
+            height: 0,
+            num: 0
       },
       onLoad() {
             this.listkind();
             this.getbanner();
             this.getList();
+            console.log(this.data.list.length + "length的长度");
       },
 
-      // swiper滚动
-      swiperChange(e){
-           this.swiperCollegeSelect(e.detail.current-1);
+      // swiper滚动 获取学院书籍列表
+      swiperChange(e) {
+            if (e.detail.source === "touch") {
+                  this.setData({
+                        num: e.detail.current
+                  })
+            }
+            if(this.data.scrollTop >300){
+            console.log("执行了");
+            wx.pageScrollTo({
+                  scrollTop: 0
+            })
+      }
+      
+            this.swiperCollegeSelect(e.detail.current - 1);
       },
       swiperCollegeSelect(e) {
             this.setData({
                   collegeCur: e - 1,
-                  scrollLeft: (e- 3) * 100,
+                  scrollLeft: (e - 3) * 100,
                   showList: false,
             })
             this.getList();
       },
 
       //监测屏幕滚动
-      onPageScroll: function(e) {
-            console.log("屏幕滚动");
+      onPageScroll: function (e) {
             this.setData({
                   scrollTop: parseInt((e.scrollTop) * wx.getSystemInfoSync().pixelRatio)
             })
@@ -44,7 +56,7 @@ Page({
             let that = this;
             wx.getStorage({
                   key: 'iscard',
-                  success: function(res) {
+                  success: function (res) {
                         that.setData({
                               iscard: res.data
                         })
@@ -88,6 +100,8 @@ Page({
             this.setData({
                   collegeCur: e.currentTarget.dataset.id - 1,
                   scrollLeft: (e.currentTarget.dataset.id - 3) * 100,
+                 
+                  num: e.currentTarget.dataset.id+1,
                   showList: false,
             })
             this.getList();
@@ -127,12 +141,14 @@ Page({
                   dura: _.gt(new Date().getTime()),
                   collegeid: collegeid
             }).orderBy('creat', 'desc').limit(20).get({
-                  success: function(res) {
+                  success: function (res) {
                         wx.stopPullDownRefresh(); //暂停刷新动作
                         if (res.data.length == 0) {
                               that.setData({
                                     list: [],
+                                    height: 800
                               })
+
                               return false;
                         }
                         if (res.data.length < 20) {
@@ -141,13 +157,16 @@ Page({
                                     page: 0,
                                     list: res.data,
                                     // length:res.data.length,
-                                    height:res.data.length*277
+                                    height: res.data.length > 20 ? 20 : res.data.length * 277
+
                               })
+
                         } else {
                               that.setData({
                                     page: 0,
                                     list: res.data,
                                     nomore: false,
+                                    height: res.data.length > 20 ? 20 : res.data.length * 277
                               })
                         }
                   }
@@ -161,7 +180,7 @@ Page({
                   console.log("nomore");
                   return false
             }
-            console.log("跳过if");
+
             let page = that.data.page + 1;
             if (that.data.collegeCur == -2) {
                   var collegeid = _.neq(-2); //除-2之外所有
@@ -173,22 +192,31 @@ Page({
                   dura: _.gt(new Date().getTime()),
                   collegeid: collegeid
             }).orderBy('creat', 'desc').skip(page * 20).limit(20).get({
-                  success: function(res) {
+                  success: function (res) {
                         if (res.data.length == 0) {
                               that.setData({
                                     nomore: true
                               })
                               return false;
                         }
-                        if (res.data.length < 20) {
+                        else if (res.data.length < 20) {
+                              console.log("这里");
                               that.setData({
-                                    nomore: true
+                                    nomore: true,
+                                    list: that.data.list.concat(res.data),
+                                    height: (that.data.list.length+res.data.length) * 277
                               })
+                              that.data.nomore = true
                         }
-                        that.setData({
+                        else{
+                              that.setData({
                               page: page,
-                              list: that.data.list.concat(res.data)
+                              list: that.data.list.concat(res.data),
+                              height: (that.data.list.length+res.data.length) * 277
                         })
+                  }
+
+                        console.log(that.data)
                   },
                   fail() {
                         wx.showToast({
@@ -222,8 +250,8 @@ Page({
       getbanner() {
             let that = this;
             db.collection('banner').get({
-                  success: function(res) {
-                        console.log(res,"轮播图");
+                  success: function (res) {
+                        console.log(res, "轮播图");
                         that.setData({
                               banner: res.data[0].list
                         })
@@ -232,9 +260,9 @@ Page({
       },
       //跳转轮播链接
       goweb(e) {
-            if (e.currentTarget.dataset.web){
+            if (e.currentTarget.dataset.web) {
                   wx.navigateTo({
-                        url: '/pages/web/web?url='+e.currentTarget.dataset.web.url,
+                        url: '/pages/web/web?url=' + e.currentTarget.dataset.web.url,
                   })
             }
       },

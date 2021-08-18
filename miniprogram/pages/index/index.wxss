@@ -296,8 +296,9 @@
 }
 
 .nocontent {
-      width: 100%;
-      height: calc(100% - 400rpx);
+      width: 50%;
+      /* height: calc(100% - 500rpx); */
+      height:300rpx;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -305,10 +306,10 @@
       box-sizing: border-box;
 }
 
-.nocontent image {
-      padding-left: 80rpx;
+.noimage {
+      padding-left: 200rpx;
       width: 340rpx;
-      height: 272rpx;
+      height: 200rpx;
 }
 
 .blank_text {
@@ -316,6 +317,7 @@
       font-size: 32rpx;
       letter-spacing: 2rpx;
       color: #c6c6c8;
+
 }
 
 .fixed {
