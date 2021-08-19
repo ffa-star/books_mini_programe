@@ -14,20 +14,7 @@ Page({
             isShow: false,
             first_title: true,
             place: '',
-            // dataList: [
-            //       {
-            //             title: "文本类型：",
-            //             text: "文本内容"
-            //       },
-            //       {
-            //             title: "文本类型：",
-            //             text: "文本内容"
-            //       },
-            //       {
-            //             title: "文本类型：",
-            //             text: "文本内容"
-            //       },
-            // ]
+         
       },
 
       // 遮罩层部分

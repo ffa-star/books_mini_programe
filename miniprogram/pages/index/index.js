@@ -100,7 +100,6 @@ Page({
             this.setData({
                   collegeCur: e.currentTarget.dataset.id - 1,
                   scrollLeft: (e.currentTarget.dataset.id - 3) * 100,
-                 
                   num: e.currentTarget.dataset.id+1,
                   showList: false,
             })

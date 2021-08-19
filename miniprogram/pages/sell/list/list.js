@@ -23,6 +23,9 @@ Page({
             })
             this.getList();
       },
+      onShow: function(){
+            this.getList();
+      },
       getList() {
             let that = this;
             db.collection('publish').where({

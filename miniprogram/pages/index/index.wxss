@@ -83,7 +83,7 @@
 
 .nav-item {
       width: 100rpx;
-      height: 100%;
+      height: 98%;
       display: inline-block;
       font-size: 32rpx;
 }
@@ -96,14 +96,20 @@
       justify-content: center;
       letter-spacing: 4rpx;
       box-sizing: border-box;
+
 }
 
 .tab-on {
-      color: #00adb5;
+      /* color: #70a1d7; */
+      color:#399fe2;
       /* color: #00b8a9; */
       font-size: 32rpx !important;
       font-weight: 600;
-      border-bottom: 4rpx solid   #11999e !important;
+      /* border-bottom: 4rpx solid   #11999e !important; */
+      border-bottom: 4rpx solid   #2f9296 !important;
+}
+.swp{
+      margin-top: 10rpx;
 }
 
 .kind_img {
@@ -296,28 +302,33 @@
 }
 
 .nocontent {
-      width: 50%;
-      /* height: calc(100% - 500rpx); */
-      height:300rpx;
+      width: 100%;
+      /* height: calc(100% - 800rpx); */
+      height:675rpx;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
       box-sizing: border-box;
+      background-color: #f6f6f8;
 }
 
-.noimage {
-      padding-left: 200rpx;
-      width: 340rpx;
-      height: 200rpx;
+.noimage {    
+      width: 100%;
+      height: 600rpx;
+      margin:0rpx;
 }
 
 .blank_text {
-      padding-top: 40rpx;
+      margin:0rpx;
+      height:70rpx;
+      text-align: center;
+      line-height: 70rpx;
       font-size: 32rpx;
+      align-items: center;
       letter-spacing: 2rpx;
       color: #c6c6c8;
-
+     
 }
 
 .fixed {
