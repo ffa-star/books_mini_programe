@@ -11,7 +11,7 @@ Page({
             count: 3,
       },
       onLoad(){
-            this.getimg();
+            // this.getimg();
             this.countDown();
             this.getuserdetail();
       },
@@ -59,20 +59,20 @@ Page({
             }
       },
       //获取背景图
-      getimg() {
-            let that = this;
-            db.collection('start').where({}).get({
-                  success: function (res) {
-                        console.log(res)
-                        that.setData({
-                              bgurl: res.data[0].url
-                        })
-                  },
-                  fail(){
-                        that.setData({
-                              bgurl: JSON.parse(config.data).bgurl,
-                        })
-                  }
-            })
-      },
+      // getimg() {
+      //       let that = this;
+      //       db.collection('start').where({}).get({
+      //             success: function (res) {
+      //                   console.log(res)
+      //                   that.setData({
+      //                         bgurl: res.data[0].url
+      //                   })
+      //             },
+      //             fail(){
+      //                   that.setData({
+      //                         bgurl: JSON.parse(config.data).bgurl,
+      //                   })
+      //             }
+      //       })
+      // },
 })

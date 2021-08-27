@@ -210,6 +210,7 @@ Page({
                   },
                   fail: err => {
                         console.error(err)
+                        console.log("shibai");
                   }
             })
       },
@@ -372,6 +373,7 @@ Page({
             this.setData({
                   show_a:true,
                   show_b:false,
+                  show_c:false,
                   active: 0,
             })
       }

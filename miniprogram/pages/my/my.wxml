@@ -24,7 +24,7 @@
             <image src="/images/publish.png"></image>
             <view>我的购买</view>
       </view> -->
-      <view class="center_1" bindtap="go" data-go="/pages/help/help">
+      <view class="center_1" bindtap="go1" data-go="/pages/help/help">
             <image src="/images/help.png"></image>
             <view>帮助中心</view>
       </view>
@@ -60,7 +60,7 @@
             </view>
             <image src="/images/go.png"></image>
       </view>
-      <view class="bottom_card" bindtap="go" data-go="/pages/about/about">
+      <view class="bottom_card" bindtap="go1" data-go="/pages/about/about">
             <view class="bottom_1">
                   <image src="/images/guanyu.png"></image>
                   <view>关于程序</view>

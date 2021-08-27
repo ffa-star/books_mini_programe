@@ -1,7 +1,7 @@
 <view class="top_contain">
       <view class="des_contain">
-            <view class="name">刘发</view>
-            <view class="sign">你好</view>
+            <view class="name">FFA</view>
+            <view class="sign">给你的二手书一次漂流的机会吧</view>
       </view>
       <view class="avator_box">
             <image class="avator" src="/images/tou.png"></image>
@@ -14,9 +14,9 @@
       </view>
       <view class="title">联系方式</view>
       <view class="description">
-            <view class="tip" bindtap="copy" data-copy="https://github.com/xuhuai66" data-name="链接">
+            <view class="tip" bindtap="copy" data-copy="https://github.com/ffa-star" data-name="链接">
                   <view>Github</view>:
-                  <text>https://github.com/xuhuai66</text>
+                  <text>https://github.com/ffa-star</text>
             </view>
             <view class="tip" bindtap="copy" data-copy="xuhuai66" data-name="微信">
                   <view>Wechat</view>:

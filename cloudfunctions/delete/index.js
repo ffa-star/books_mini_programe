@@ -9,8 +9,8 @@ exports.main = async (event, context) => {
   const db = cloud.database()
   try {
       const _ = db.command
-      return await db.collection('publish').where({
-        place:"" //只要月份字段存在，就删除
+      return await db.collection('user').where({
+        "email":"" //只要月份字段存在，就删除
       }).remove()
     }
  catch (e) {

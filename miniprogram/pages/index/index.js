@@ -17,7 +17,12 @@ Page({
             this.listkind();
             this.getbanner();
             this.getList();
-            console.log(this.data.list.length + "length的长度");
+            // wx.cloud.callFunction({
+            //       name:"delete"
+            // }).then(res=>{
+            //       console.log("删除");
+            // })
+            
       },
 
       // swiper滚动 获取学院书籍列表
@@ -145,7 +150,7 @@ Page({
                         if (res.data.length == 0) {
                               that.setData({
                                     list: [],
-                                    height: 800
+                                    height: 650
                               })
 
                               return false;
@@ -174,9 +179,9 @@ Page({
       // 获得更多
       more() {
             let that = this;
-            console.log("more");
+            // console.log("more");
             if (that.data.nomore || that.data.list.length < 20) {
-                  console.log("nomore");
+                  // console.log("nomore");
                   return false
             }
 
@@ -250,7 +255,7 @@ Page({
             let that = this;
             db.collection('banner').get({
                   success: function (res) {
-                        console.log(res, "轮播图");
+                        // console.log(res, "轮播图");
                         that.setData({
                               banner: res.data[0].list
                         })

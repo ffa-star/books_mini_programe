@@ -6,10 +6,10 @@
 <view style="height:66.8px"></view>
 
 <!--步骤一-->
-<van-transition show="{{ show_a }}" name="fade-right" custom-class="block" duration="{{entime}}">
+<van-transition show="{{ show_a }}" name="fade-right" custom-class="block" duration="{{entime}}" >
       <view class="a_contain">
             <view class="a_inp shadow">
-                  <image class="a_scan" src="/images/scan.png"></image>
+                  <image class="a_scan" src="/images/scan.png" style="width: 75rpx; height: 47rpx; display: block; box-sizing: border-box; left: NaNrpx; top: NaNrpx"></image>
                   <input bindconfirm="confirm" bindinput="isbnInput" value="{{isbn}}" type="number" maxlength="13" placeholder-class="a_pla" placeholder="请输入书本的ISBN号码(纯数字)" />
                   <view class="a_confirm" bindtap="confirm">确认</view>
             </view>
@@ -23,7 +23,8 @@
 </van-transition>
 <!--步骤二-->
 <!-- 去掉取货方式 -->
-<van-transition show="{{ show_b }}" name="fade-right" custom-class="block" duration="{{entime}}">
+
+<van-transition show="{{ show_b }}" name="fade-right" custom-class="block" duration="{{entime}}" > 
       <view class="b_contain">
             <view class="b_top">
                   <view class="b_poster">
@@ -51,7 +52,7 @@
                         <view class="b_name">类别</view>
                         <radio-group class="kind-group" bindchange="kindChange">
                               <label class="b_radio" wx:for="{{kind}}" wx:key="id">
-                                    <radio color="#fbbd08" value="{{item.id}}" checked="{{item.check}}" />{{item.name}}
+                                    <radio color="#769fcd" value="{{item.id}}" checked="{{item.check}}" />{{item.name}}
                               </label>
                         </radio-group>
                   </view>
@@ -98,14 +99,14 @@
                   </view>
                   <view class="b_bar">
                         <view class="name">发布时长(天)</view>
-                        <van-stepper bind:change="duraChange" value="{{dura}}" min="1" max="50" />
+                        <van-stepper bind:change="duraChange" value="{{dura}}" min="1" max="60" />
                   </view>
                   <view class="b_tips">
                         <text>* </text>此时长内您的发布信息将会展示给所有同学，超时后您只需去个人中心处擦亮即可再次展示</view>
             </view>
-            <view class="b_publish" bindtap="check_pub">马上发布
+            <view class="b_publish" bindtap="check_pub" style="width: 308rpx; height: 106rpx; display: flex; box-sizing: border-box; left: 383rpx; top: 29rpx; position: relative">马上发布
             </view>
-            <view class="b_publish" bindtap="check_return">返回
+            <view class="b_publish1" bindtap="check_return" style="width: 308rpx; height: 106rpx; display: flex; box-sizing: border-box; left: 38rpx; top: -106rpx; position: relative">返　　回
             </view>
       </view>
 </van-transition>

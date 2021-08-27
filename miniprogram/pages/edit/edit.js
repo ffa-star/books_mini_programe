@@ -10,7 +10,7 @@ Page({
        */
       data: {
             ids: -1,
-            phone: '',
+            // phone: '',
             wxnum: '',
             qqnum: '',
             email: '',
@@ -61,7 +61,7 @@ Page({
                         let infor = res.data[0];
                         console.log(infor, "info");
                         that.setData({
-                              phone: infor.phone,
+                              // phone: infor.phone,
                               qqnum: infor.qqnum,
                               wxnum: infor.wxnum,
                               info:app.userInfo,
@@ -135,9 +135,9 @@ Page({
       //       })
 
       // },
-      phoneInput(e) {
-            this.data.phone = e.detail.value;
-      },
+      // phoneInput(e) {
+      //       this.data.phone = e.detail.value;
+      // },
       wxInput(e) {
             this.data.wxnum = e.detail.value;
       },
@@ -168,19 +168,19 @@ Page({
       check() {
             let that = this;
             //校检手机
-            let phone = that.data.phone;
-            if (phone !== '') {
-                  if (!(/^1[3|4|5|7|8][0-9]{9}$/.test(phone))) {
-                        console.log(!(/^1[3|4|5|7|8][0-9]{9}$/.test(phone)));
-                        console.log(phone);
-                        wx.showToast({
-                              title: '请输入正确的手机号',
-                              icon: 'none',
-                              duration: 2000
-                        });
-                        return false;
-                  }
-            }
+            // let phone = that.data.phone;
+            // if (phone !== '') {
+            //       if (!(/^1[3|4|5|7|8][0-9]{9}$/.test(phone))) {
+            //             console.log(!(/^1[3|4|5|7|8][0-9]{9}$/.test(phone)));
+            //             console.log(phone);
+            //             wx.showToast({
+            //                   title: '请输入正确的手机号',
+            //                   icon: 'none',
+            //                   duration: 2000
+            //             });
+            //             return false;
+            //       }
+            // }
             //校检校区
             let ids = that.data.ids;
             if (ids === -1) {
@@ -206,7 +206,7 @@ Page({
             //校检微信号
             let wxnum = that.data.wxnum;
             if (wxnum !== '') {
-                  if (!(/^[a-zA-Z]([-_a-zA-Z0-9]{5,19})+$/.test(wxnum))) {
+                  if (!(/^[a-zA-Z]([-_a-zA-Z0-9]{5,19})+$/.test(wxnum)) &&!(/^1[3|4|5|7|8][0-9]{9}$/.test(wxnum))) {
                         wx.showToast({
                               title: '请输入正确微信号',
                               icon: 'none',
@@ -216,7 +216,7 @@ Page({
                   }
             }
             // 至少输入一项
-            if (!phone && !wxnum && !qqnum) {
+            if ( !wxnum && !qqnum) {
                   wx.showToast({
                         title: '联系方式请至少输入一项',
                         icon: 'none',
@@ -238,7 +238,7 @@ Page({
                         _openid: app.openid
                   }).update({
                         data: {
-                              phone: that.data.phone,
+                              // phone: that.data.phone,
                               campus: that.data.campus[that.data.ids],
                               qqnum: that.data.qqnum,
                               email: that.data.email,

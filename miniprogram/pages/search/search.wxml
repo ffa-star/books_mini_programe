@@ -1,7 +1,7 @@
 <wxs src="../../common.wxs" module="morejs" />
 <view class="top_contain">
       <view class="search_box">
-            <image src="/images/search.png"></image>
+            <image src="/images/search.png" style="width: 71rpx; height: 40rpx; display: block; box-sizing: border-box; left: NaNrpx; top: NaNrpx"></image>
             <input bindinput="keyInput" bindconfirm="search" placeholder="输入您感兴趣的内容"></input>
       </view>
       <view class="search" bindtap="search">搜索</view>

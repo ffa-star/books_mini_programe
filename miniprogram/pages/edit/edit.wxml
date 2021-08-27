@@ -1,6 +1,8 @@
- <view class="top-bg"></view>
-<view class="contain">
-      <view class="card" style="width: 671rpx; height: 661rpx; display: block; box-sizing: border-box; left: NaNrpx; top: NaNrpx">
+ <view class="top-bg">
+      <image src = "/images/editb.jpg" style="width: 750rpx; height: 647rpx; display: inline-block; box-sizing: border-box; left: NaNrpx; top: NaNrpx"></image>
+  </view>
+<view class="contain" style="position: absolute; left: 0rpx; top: 59rpx">
+      <view class="card" style="width: 671rpx; height: 633rpx; display: block; box-sizing: border-box; left: NaNrpx; top: NaNrpx">
             <view class="title">修改资料</view>
             <!-- <button class="phone" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">
                   <block wx:if="{{phone==''}}"> 请点击获取您的手机号</block>
@@ -18,9 +20,9 @@
              <!-- <view class="contact">
                   <input bindinput="emInput" value="{{email}}" maxlength="30" placeholder-class="pache" placeholder="输入您的邮箱地址" />
             </view> -->
-            <view class="contact">
+            <!-- <view class="contact">
                   <input bindinput="phoneInput" value="{{phone}}" maxlength="30" placeholder-class="pache" placeholder="输入您的手机号" />
-            </view>
+            </view> -->
             <view class="contact">
                   <input bindinput="wxInput" value="{{wxnum}}" maxlength="30" placeholder-class="pache" placeholder="输入您的微信号(选填)" />
             </view>
@@ -30,12 +32,12 @@
       </view> 
       <!--底部确认-->
      <!-- <button class="confirm" open-type='getUserInfo' bindgetuserinfo="getUserInfo">提交修改</button> -->
-     <button class="confirm" bindtap="submit">提交修改</button>
-     <button class="confirm" bindtap="skip">跳过</button>
+     <button class="confirm" bindtap="submit" style="width: 286rpx; height: 99rpx; display: flex; box-sizing: border-box; left: 181rpx; top: 59rpx; position: relative">提交修改</button>
+     <button class="confirm1" bindtap="skip" style="width: 286rpx; height: 99rpx; display: flex; box-sizing: border-box; left: -179rpx; top: -90rpx; position: relative">跳　过</button>
       <view class="shen_title">
             <image class="about" src="/images/about.png" />使用申明
       </view>
-      <view class="des">1. 请确保手机号和邮箱百分百有效，之后将用于发送实时订单通知。</view>
+      <view class="des">1. 请确保QQ或者微信号分百有效，之后买家将通过他们与您联系。</view>
       <view class="des">2. 在未经您同意及确认之前，本程序不会将您的注册信息用于任何其它商业目的。</view>
       <view class="des">3. 本程序将对您所提供的资料进行严格的管理及保护，本程序将使用相应的技术，防止您的个人资料丢失、被盗用或遭篡改。</view>
       <view class="des">4. 请您放心使用！</view>

@@ -1,19 +1,22 @@
 page {
-      background: #eee;
+      background: rgb(247, 246, 246);
+      margin-top:0;
+      padding:0
 }
 
 .top_contain {
+      top:0;
       width: 100%;
       display: flex;
       box-sizing: border-box;
       padding: 20rpx 36rpx 30rpx 0;
-      background: #fbbd08;
+      background: #e9f1f6;
       position: relative;
       justify-content: flex-end;
 }
 
 .des_contain {
-      width: 618rpx;
+      width: 690rpx;
       height: 157rpx;
       border-radius: 10rpx;
       background: #fff;
@@ -21,7 +24,7 @@ page {
       box-sizing: border-box;
       flex-direction: column;
       justify-content: center;
-      padding: 0 0 0 90rpx;
+      padding: 0 0 0 150rpx;
 }
 
 .name {
@@ -34,7 +37,7 @@ page {
       font-size: 28rpx;
       letter-spacing: 3rpx;
       line-height: 45rpx;
-      color: #b8b8b8;
+      color: rgb(151, 151, 151);
 }
 
 .avator_box {
@@ -62,7 +65,7 @@ page {
 }
 
 .title {
-      margin-top: 20rpx;
+      margin-top: 40rpx;
       line-height: 56rpx;
       padding-left: 20rpx;
       font-size: 32rpx;

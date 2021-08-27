@@ -30,7 +30,7 @@
       font-size: 30rpx;
       letter-spacing: 2rpx;
       display: flex;
-      align-items: ;
+      /* align-items: ; */
 }
 
 .text-red {
@@ -122,7 +122,7 @@
 }
 
 .bg-yellow {
-      background: #fbbd08;
+      background: #769fcd;
       color: #fff;
 }
 .c2 {

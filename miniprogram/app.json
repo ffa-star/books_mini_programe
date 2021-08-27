@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/start/start",
     "pages/index/index",
     "pages/login/login",
     "pages/publish/publish",
@@ -42,7 +43,7 @@
       },
       {
         "pagePath": "pages/publish/publish",
-        "text": "发布",
+        "text": "卖书",
         "iconPath": "/images/tabbar/publish.png",
         "selectedIconPath": "/images/tabbar/publish_on.png"
       },

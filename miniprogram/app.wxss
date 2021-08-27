@@ -1,3 +1,9 @@
+page,view,text,swiper,swiper-item,image,navigator{
+      padding:0;
+      margin:0;
+      box-sizing: border-box;
+}
+
 page {
       background: #fff;
       width: 100%;
@@ -5,6 +11,8 @@ page {
       /* font-family:'Courier New', Courier, monospace; */
       font-size: 32rpx;
       /*微信小程序中，使用rpx做单位*/
+      margin:0rpx;
+      padding:0rpx
 
 }
 
@@ -24,6 +32,7 @@ page {
       justify-content: center;
       align-items: center;
       padding: 30rpx 0;
+      top:-20rpx;
 }
 
 .loadmore image {

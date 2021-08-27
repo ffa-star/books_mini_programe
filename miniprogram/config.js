@@ -31,20 +31,22 @@ var data = {
             
       ],
       //配置学院，建议不要添加太多，不然前端不好看
-      college: [{
-                  name: '文学',
+      college: [
+            
+            {
+                  name: '通用',
                   id: -1
             },
             {
-                  name: '理学',
+                  name: '课外',
                   id: 0
             },
             {
-                  name: '马克思',
+                  name: '考研',
                   id: 1
             },
             {
-                  name: '经管 ',
+                  name: '考级',
                   id: 2
             },
             {
@@ -52,61 +54,74 @@ var data = {
                   id: 3
             },
             {
-                  name: '外院',
+                  name: '文学',
                   id: 4
             },
             {
-                  name: '化工',
+                  name: '理学',
                   id: 5
             },
             {
-                  name: '生命',
+                  name: '马克思',
                   id: 6
             },
             {
-                  name: '机械',
+                  name: '经管 ',
                   id: 7
             },
             {
-                  name: '信科',
+                  name: '外院',
                   id: 8
             },
             {
-                  name: '电气',
+                  name: '化工',
                   id: 9
             },
             {
-                  name: '纺织',
+                  name: '生命',
                   id: 10
             },
             {
-                  name: '医学',
+                  name: '机械',
                   id: 11
             },
             {
-                  name: '公卫',
+                  name: '信科',
                   id: 12
             },
             {
-                  name: '体科',
+                  name: '电气',
                   id: 13
             },
             {
-                  name: '交土',
+                  name: '纺织',
                   id: 14
             },
             {
-                  name: '药学',
+                  name: '医学',
                   id: 15
             },
             {
-                  name: '张謇',
+                  name: '公卫',
                   id: 16
             },
             {
-                  name: '其他',
+                  name: '体科',
                   id: 17
             },
+            {
+                  name: '交土',
+                  id: 18
+            },
+            {
+                  name: '药学',
+                  id: 19
+            },
+            {
+                  name: '张謇',
+                  id: 20
+            },
+            
       ],
 }
 //下面的就别动了

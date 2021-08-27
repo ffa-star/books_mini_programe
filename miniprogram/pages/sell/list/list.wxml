@@ -39,8 +39,8 @@
       <import src="/common.wxml" />
       <template is="loadmore" data="{{nomore}}" />
 </block>
-<van-transition show="{{ scrollTop>500 }}" custom-class="block" duration="600">
+<!-- <van-transition show="{{ scrollTop>500 }}" custom-class="block" duration="600">
       <view class="totop" bindtap="gotop">
             <image src="/images/top.png"></image>
       </view>
-</van-transition>
+</van-transition> -->

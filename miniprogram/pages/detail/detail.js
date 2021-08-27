@@ -62,11 +62,7 @@ Page({
             this.getuserdetail();
             this.data.id = e.scene;
             this.getPublish(e.scene);
-            // wx.cloud.callFunction({
-            //       name:"delete"
-            // }).then(res=>{
-            //       console.log("删除");
-            // })
+            
       },
       changeTitle(e) {
             let that = this;

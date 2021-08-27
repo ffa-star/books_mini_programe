@@ -56,6 +56,7 @@ Page({
                         url: e.currentTarget.dataset.go
                   })     
       },
+      // 跳转客服
       go1(e) {
             wx.navigateTo({
                   url: e.currentTarget.dataset.go
