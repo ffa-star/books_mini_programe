@@ -11,25 +11,25 @@ Page({
             }, //进入褪出动画时长
             college: JSON.parse(config.data).college.splice(1),
             steps: [{
-                        text: '步骤一',
-                        desc: '扫描isbn码'
-                  },
-                  {
-                        text: '步骤二',
-                        desc: '补充图书信息'
-                  },
-                  {
-                        text: '步骤三',
-                        desc: '发布成功'
-                  },
+                  text: '步骤一',
+                  desc: '扫描isbn码'
+            },
+            {
+                  text: '步骤二',
+                  desc: '补充图书信息'
+            },
+            {
+                  text: '步骤三',
+                  desc: '发布成功'
+            },
             ],
       },
       //恢复初始态
       initial() {
             let that = this;
             that.setData({
-                  dura: 30,
-                  price: 15,
+                  dura: 365,
+                  price: 10,
                   place: '',
                   chooseDelivery: 0,
                   cids: '-1', //学院选择的默认值
@@ -122,12 +122,12 @@ Page({
       },
 
       // 登录
-      getUserInfo() {
+      async getUserInfo() {
             let that = this;
             wx.getUserProfile({
                   desc: '用于完善会员资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
-                   success: async (res) => {
-                        const {result} = await login(res);
+                  success: async (res) => {
+                        const { result } = await login(res);
                         app.openid = result.OPENID;
                         app.userInfo = res.userInfo;
                         let test = res.errMsg.indexOf("ok");
@@ -141,21 +141,21 @@ Page({
                               that.setData({
                                     userInfo: res.userInfo
                               })
-                              // that.check();
-                              // that.toZhuCe();
+
                               wx.navigateTo({
                                     url: '/pages/edit/edit',
                               })
+
                         }
                   },
-                  fail:()=>{
+                  fail: () => {
                         console.log("取消了")
                   },
             })
       },
 
       //查询书籍数据库详情
-      get_book(bn) {
+      async get_book(bn) {
             let that = this;
             wx.showLoading({
                   title: '正在获取'
@@ -194,7 +194,7 @@ Page({
                         if (res.result.body.status == 0) {
                               db.collection('books').add({
                                     data: res.result.body.result,
-                                    success: function(res) {
+                                    success: function (res) {
                                           wx.hideLoading();
                                           that.setData({
                                                 bookinfo: res.result.body.result,
@@ -369,11 +369,11 @@ Page({
       },
 
       // 返回
-      check_return(){
+      check_return() {
             this.setData({
-                  show_a:true,
-                  show_b:false,
-                  show_c:false,
+                  show_a: true,
+                  show_b: false,
+                  show_c: false,
                   active: 0,
             })
       }

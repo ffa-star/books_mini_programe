@@ -33,7 +33,7 @@
       <!--底部确认-->
      <!-- <button class="confirm" open-type='getUserInfo' bindgetuserinfo="getUserInfo">提交修改</button> -->
      <button class="confirm" bindtap="submit" style="width: 286rpx; height: 99rpx; display: flex; box-sizing: border-box; left: 181rpx; top: 59rpx; position: relative">提交修改</button>
-     <button class="confirm1" bindtap="skip" style="width: 286rpx; height: 99rpx; display: flex; box-sizing: border-box; left: -179rpx; top: -90rpx; position: relative">跳　过</button>
+     <button class="confirm1" bindtap="skip" style="width: 286rpx; height: 99rpx; display: flex; box-sizing: border-box; left: -179rpx; top: -90rpx; position: relative">直接登录</button>
       <view class="shen_title">
             <image class="about" src="/images/about.png" />使用申明
       </view>

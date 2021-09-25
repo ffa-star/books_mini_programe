@@ -39,18 +39,12 @@ exports.main = async(event, context) => {
             });
       });
       //获取openid
-      app.router('getid', async(ctx) => {
-            // const wxContext = cloud.getWXContext()
-            // ctx.body = wxContext.OPENID;
-            // console.log(wxContent.OPENID);
-            // console.log("运行到云端了");
+      app.router('getid', async(ctx) => {          
             let{APPID,OPENID} = cloud.getWXContext();
-            console.log(OPENID+"云端openid");
             return{
                   APPID,
                   OPENID
             }
-
-      });;
+      });
       return app.serve();
 }

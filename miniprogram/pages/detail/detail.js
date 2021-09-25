@@ -31,7 +31,6 @@ Page({
 
       // 复制
       copy(event) {
-            console.log(this.data.userinfo);
             const {num}=event.currentTarget.dataset;
             // var that = this;
        
@@ -45,7 +44,6 @@ Page({
                         })
                   },
                   fail(res){
-                        console.log(res);
                         wx.showToast({
                               // icon:'fail',
                               duration:500,
@@ -90,7 +88,6 @@ Page({
                   _openid: m
             }).get({
                   success: function (res) {
-                        console.log(res,"卖家信息");
                         that.setData({
                               userinfo: res.data[0]
                         })

@@ -130,9 +130,7 @@ Page({
                               that.setData({
                                     userInfo: e.userInfo
                               })
-                              // that.check();
-                              // that.toZhuCe();
-                              console.log("跳转前" + app.openid);
+
                               wx.navigateTo({
                                     url: '/pages/edit/edit',
                               })

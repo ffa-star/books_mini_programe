@@ -99,7 +99,7 @@
                   </view>
                   <view class="b_bar">
                         <view class="name">发布时长(天)</view>
-                        <van-stepper bind:change="duraChange" value="{{dura}}" min="1" max="60" />
+                        <van-stepper bind:change="duraChange" value="{{dura}}" min="30" max="999" />
                   </view>
                   <view class="b_tips">
                         <text>* </text>此时长内您的发布信息将会展示给所有同学，超时后您只需去个人中心处擦亮即可再次展示</view>
