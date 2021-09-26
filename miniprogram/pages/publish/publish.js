@@ -1,4 +1,5 @@
 const db = wx.cloud.database();
+const _ = db.command;
 const app = getApp();
 const config = require("../../config.js");
 import { login } from "../../request/index.js";
@@ -64,6 +65,27 @@ Page({
       },
       onLoad() {
             this.initial();
+          
+            // db.collection("publish").where
+            // ({
+            //   "bookinfo._id":"cd045e756128a0f608301b016e152952"
+            // }).
+            // update({
+            //   data:{
+            //   "bookinfo.pic":"http://api.jisuapi.com/isbn/upload/d2/274caf3c4e0111.jpg"}
+            // }).then(res=>{
+            //   console.log(res,"res");
+            // })
+            
+            // wx.cloud.callFunction({
+            //       name:"updatePublish",
+            //       data:{
+            //             "_id":"cd045e756128a0f608301b016e152952",
+            //             "pic":"http://api.jisuapi.com/isbn/upload/d2/274caf3c4e0111.jpg"
+            //       }
+            // }).then(res=>{
+            //       console.log(res,"min");
+            // })
       },
       //手动输入isbn
       isbnInput(e) {

@@ -105,11 +105,11 @@
 <!-- 现在的问题是如果上面点击后，应该更新swiper-item的id 或者这里用变量 -->
 <!-- 列表显示 -->
 <!-- <view hidden="{{!iscard}}"> -->
-<view>
+<!-- <view> -->
       <!-- <swiper style="height:calc({{length}}*277rpx)" bindchange="swiperChange"> -->
-      <swiper class="swp" style="height:{{height<=750?800:height}}rpx" bindchange="swiperChange" current="{{num}}">
+      <!-- <swiper class="swp" style="height:{{height<=750?800:height}}rpx "  bindchange="swiperChange" current="{{num}}"> -->
             <!-- 第一个item是全部 -->
-            <swiper-item>
+            <!-- <swiper-item >
                   <view class="nocontent" wx:if="{{list.length==0}}">
                         <image lazy-load class="noimage"
                               src="https://6666-ffa-8g9cvwhn17dacc95-1306565947.tcb.qcloud.la/404/blank.gif?sign=ce78bd137a9cfd2f0b8daa284611ad87&t=1629460312">
@@ -117,9 +117,9 @@
                         <view class="blank_text">这里空空如也~</view>
                   </view>
                   <block wx:if="{{list.length>0}}">
-                        <block wx:for="{{list}}" wx:key="_id">
+                        <block wx:for="{{list}}" wx:key="index"> -->
                               <!-- 循环列表，下面是一本书的内容 -->
-                              <view class="list_box" bindtap="detail" data-id="{{item._id}}">
+                              <!-- <view class="list_box" bindtap="detail" data-id="{{item._id}}">
                                     <image lazy-load class="list_poster" src="{{item.bookinfo.pic}}"></image>
                                     <view class="list_content">
                                           <view class="list_word">
@@ -136,50 +136,76 @@
                                     </view>
                               </view>
                         </block>
-                  </block>
-                  <!-- 已加载到底？ 超过三本书就会显示-->
-            </swiper-item>
-
-            <!-- swiper-item相当于一个页面，所以这里循环college，循环college页面 -->
-            <swiper-item wx:for="{{college}}" wx:for-item="i" wx:key="index">
-                  <!-- 这边的没有内容显示 -->
-                  <view class="nocontent" wx:if="{{list.length==0}}">
-                        <image lazy-load class="noimage"
-                              src="https://6666-ffa-8g9cvwhn17dacc95-1306565947.tcb.qcloud.la/404/blank.gif?sign=ce78bd137a9cfd2f0b8daa284611ad87&t=1629460312">
-                        </image>
-                        <view class="blank_text">这里空空如也~</view>
-                  </view>
-
-                  <block wx:if="{{list.length>0}}">
-                        <block wx:for="{{list}}" wx:key="_id">
-                              <!-- 循环列表，下面是一本书的内容 -->
-                              <view class="list_box" bindtap="detail" data-id="{{item._id}}">
-                                    <image lazy-load class="list_poster" src="{{item.bookinfo.pic}}"></image>
-                                    <view class="list_content">
-                                          <view class="list_word">
-                                                <view class="list_title text-cut">{{item.bookinfo.title}}
-                                                </view>
-                                                <view class="list_author text-cut">{{item.bookinfo.author}}
-                                                </view>
-                                          </view>
-                                          <view class="list_between">
-                                                <view class="list_price">￥{{item.price}}.00元</view>
-                                                <view class="list_time">{{morejs.timelog(item.creat )}}发布
-                                                </view>
-                                          </view>
-                                    </view>
-                              </view>
-                        </block>
-                  </block>
-                  <block wx:if="{{list.length>=1}}">
+                  </block> -->
+                  <!-- 已加载到底？ 超过一本书就会显示-->
+                  <!-- <block wx:if="{{list.length>=1}}">
                         <import src="/common.wxml" />
                         <template is="loadmore" data="{{nomore}}" />
                   </block>
-            </swiper-item>
-      </swiper>
-</view>
+            </swiper-item> -->
+
+            <!-- swiper-item相当于一个页面，所以这里循环college，循环college页面 -->
+            <!-- <swiper-item wx:for="{{college}}" wx:for-item="i" wx:key="index"> -->
+                  <!-- 这边的没有内容显示 -->
+                  <!-- <view class="nocontent" wx:if="{{list.length==0}}">
+                        <image lazy-load class="noimage"
+                              src="https://6666-ffa-8g9cvwhn17dacc95-1306565947.tcb.qcloud.la/404/blank.gif?sign=ce78bd137a9cfd2f0b8daa284611ad87&t=1629460312">
+                        </image>
+                        <view class="blank_text">这里空空如也~</view>
+                  </view>
+
+                  <block wx:if="{{list.length>0}}">
+                        <block wx:for="{{list}}" wx:key="_id"> -->
+                              <!-- 循环列表，下面是一本书的内容 -->
+                              <!-- <view class="list_box" bindtap="detail" data-id="{{item._id}}">
+                                    <image lazy-load class="list_poster" src="{{item.bookinfo.pic}}"></image>
+                                    <view class="list_content">
+                                          <view class="list_word">
+                                                <view class="list_title text-cut">{{item.bookinfo.title}}
+                                                </view>
+                                                <view class="list_author text-cut">{{item.bookinfo.author}}
+                                                </view>
+                                          </view>
+                                          <view class="list_between">
+                                                <view class="list_price">￥{{item.price}}.00元</view>
+                                                <view class="list_time">{{morejs.timelog(item.creat )}}发布
+                                                </view>
+                                          </view>
+                                    </view>
+                              </view>
+                        </block>
+                  </block> -->
+                  <!-- <block wx:if="{{list.length>=1}}">
+                        <import src="/common.wxml" />
+                        <template is="loadmore" data="{{nomore}}" />
+                  </block> -->
+            <!-- </swiper-item>
+      </swiper> -->
+<!-- </view> -->
 <!-- 已加载到底？ 有书就会显示-->
-<block wx:if="{{list.length>=3}}">
+<view>
+      <block wx:if="{{list.length>0}}">
+            <block wx:for="{{list}}" wx:key="_id">
+                  <view class="list_box" bindtap="detail" data-id="{{item._id}}">
+                        <image lazy-load class="list_poster" src="{{item.bookinfo.pic}}"></image>
+                        <view class="list_content">
+                              <view class="list_word">
+                                    <view class="list_title text-cut">{{item.bookinfo.title}}
+                                    </view>
+                                    <view class="list_author text-cut">{{item.bookinfo.author}}
+                                    </view>
+                              </view>
+                              <view class="list_between">
+                                    <view class="list_price">￥{{item.price}}.00元</view>
+                                    <view class="list_time">{{morejs.timelog(item.creat )}}发布
+                                    </view>
+                              </view>
+                        </view>
+                  </view>
+            </block>
+      </block>
+</view>
+<block wx:if="{{list.length>=1}}">
       <import src="/common.wxml" />
       <template is="loadmore" data="{{nomore}}" />
 </block>

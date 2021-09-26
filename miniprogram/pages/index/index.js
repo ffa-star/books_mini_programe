@@ -17,11 +17,7 @@ Page({
             this.listkind();
             this.getbanner();
             this.getList();
-            // wx.cloud.callFunction({
-            //       name:"delete"
-            // }).then(res=>{
-            //       console.log("删除");
-            // })
+           
             
       },
 
@@ -102,12 +98,19 @@ Page({
       },
       //学院选择
       collegeSelect(e) {
-            this.setData({
+            let that = this;
+            that.setData({
                   collegeCur: e.currentTarget.dataset.id - 1,
                   scrollLeft: (e.currentTarget.dataset.id - 3) * 100,
                   num: e.currentTarget.dataset.id+1,
                   showList: false,
             })
+            if(that.data.scrollTop >300){
+                  console.log("执行了");
+                  wx.pageScrollTo({
+                        scrollTop: 0
+                  })
+            }
             this.getList();
       },
       //选择全部
@@ -134,6 +137,7 @@ Page({
       },
       //获取图书列表
       getList() {
+            
             let that = this;
             if (that.data.collegeCur == -2) {
                   var collegeid = _.neq(-2); //除-2之外所有
@@ -146,6 +150,7 @@ Page({
                   collegeid: collegeid
             }).orderBy('creat', 'desc').limit(20).get({
                   success: function (res) {
+                        console.log(res,"res");
                         wx.stopPullDownRefresh(); //暂停刷新动作
                         if (res.data.length == 0) {
                               that.setData({
@@ -161,25 +166,26 @@ Page({
                                     page: 0,
                                     list: res.data,
                                     // length:res.data.length,
-                                    height: res.data.length > 20 ? 20 : res.data.length * 277
+                                    height:  res.data.length *277
 
                               })
 
-                        } else {
+                        } 
+                        if (res.data.length >= 20) {{
                               that.setData({
                                     page: 0,
                                     list: res.data,
                                     nomore: false,
-                                    height: res.data.length > 20 ? 20 : res.data.length * 277
+                                    height: res.data.length * 277
                               })
-                        }
+                        }}
+                        console.log(res.data.length+"height"+that.data.height);
                   }
             })
       },
       // 获得更多
       more() {
             let that = this;
-            // console.log("more");
             if (that.data.nomore || that.data.list.length < 20) {
                   // console.log("nomore");
                   return false
@@ -197,30 +203,32 @@ Page({
                   collegeid: collegeid
             }).orderBy('creat', 'desc').skip(page * 20).limit(20).get({
                   success: function (res) {
-                        if (res.data.length == 0) {
-                              that.setData({
-                                    nomore: true
-                              })
-                              return false;
-                        }
-                        else if (res.data.length < 20) {
-                              console.log("这里");
+                        // if (res.data.length == 0) {
+                        //       that.setData({
+                        //             nomore: true
+                        //       })
+                        //       return false;
+                        // }
+                        // else 
+                        if (res.data.length < 20) {
                               that.setData({
                                     nomore: true,
                                     list: that.data.list.concat(res.data),
                                     height: (that.data.list.length+res.data.length) * 277
                               })
-                              that.data.nomore = true
+      
                         }
-                        else{
+                        else{ 
                               that.setData({
                               page: page,
                               list: that.data.list.concat(res.data),
-                              height: (that.data.list.length+res.data.length) * 277
+                              height: (that.data.list.length+20) * 277,
+                              nomore:false
                         })
                   }
 
-                        console.log(that.data)
+                        console.log(that.data.height)
+                        console.log(that.data.list);
                   },
                   fail() {
                         wx.showToast({

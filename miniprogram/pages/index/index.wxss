@@ -127,8 +127,8 @@
       /* color: #70a1d7; */
       color:#399fe2;
       /* color: #00b8a9; */
-      font-size: 32rpx !important;
-      font-weight: 600;
+      font-size: 34rpx !important;
+      font-weight: 400;
       /* border-bottom: 4rpx solid   #11999e !important; */
       border-bottom: 4rpx solid   #2f9296 !important;
 }
