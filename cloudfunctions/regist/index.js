@@ -1,5 +1,5 @@
-const appid = 'wx5236a29540d945cf'; //你的小程序appid
-const secret = '1d0b72b8bb6543eb0dcc8fa54c1aba1a'; //你的小程序secret
+const appid = ''; //你的小程序appid
+const secret = ''; //你的小程序secret
 
 /*
 下
